@@ -4,18 +4,14 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at center, #0a0f1a 0%, #020409 100%);
-  background-image: url("./images/blackarchv3.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  background-size: cover;
   color: #e0f7ff;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin: 1%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body::before {
@@ -34,6 +30,7 @@ body::before {
   transition: all 0.3s ease;
   border-radius: 14px;
   z-index: 1;
+  padding: 0.5%;
 }
 
 .bg-glass:hover {
@@ -41,8 +38,7 @@ body::before {
   box-shadow: 0 0 25px rgba(0, 255, 0, 0.3);
 }
 
-/* 🔸 Nút download kiểu cyber neon */
-.btn-download {
+.btn-menu {
   background: linear-gradient(90deg, #00ffcc, #0066ff);
   color: black;
   font-weight: 600;
@@ -52,11 +48,24 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.btn-download:hover {
+.btn-menu:hover {
   background: linear-gradient(90deg, #0066ff, #00ffcc);
   color: white;
   box-shadow: 0 0 20px rgba(0, 255, 204, 0.6);
   transform: translateY(-2px);
+}
+
+.matrix-overlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2, 4, 9, 0.75),
+      rgba(2, 4, 9, 0.85)
+    );
+  z-index: 1;
+  pointer-events: none;
 }
 
 .avatar-matrix {

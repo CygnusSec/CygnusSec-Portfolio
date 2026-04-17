@@ -24,10 +24,10 @@ const InfoCard = () => {
       {/* Email */}
       <div className="mt-4">
         <a
-          href="mailto:tdduong@ioit.ac.vn"
+          href="mailto:trandaiduong0407@gmail.com"
           className="text-[#00ff00] hover:text-[#66ff66] hover:underline transition-all text-base font-semibold"
         >
-          tdduong@ioit.ac.vn
+          trandaiduong0407@gmail.com
         </a>
       </div>
     </div>

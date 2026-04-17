@@ -3,10 +3,10 @@ import React from "react";
 const pdfFiles = [
   { name: "Create and setup an environment", file: "/pdfs/Lab_work_1.pdf" },
   { name: "Security Threats and Scanning", file: "/pdfs/Lab_work_02.pdf" },
-  { name: "Firewall (Iptables)", file: "/pdfs/Lab_work_02.pdf" },
+  { name: "Firewall (Iptables)", file: "/pdfs/Lab_3_iptables.pdf" },
   { name: "Snort", file: "/pdfs/Lab_work_04.pdf" },
   { name: "Snort Rule", file: "/pdfs/snort_rule.txt" },
-  { name: "Practice report", file: "/pdfs/Lab_Report.pdf" },
+  { name: "Practice report", file: "/pdfs/Lab_Report_Final.pdf" },
 ];
 
 const PdfList = () => {

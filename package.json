@@ -1,6 +1,8 @@
 {
-  "name": "infosec-website",
-  "version": "1.0.0",
+  "name": "cygnus-sec",
+  "version": "2.0.0",
+  "description": "Cybersecurity Portfolio & Blog with Hacker Theme",
+  "author": "Dylan Tran <tdduong@ioit.ac.vn>",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -18,5 +20,17 @@
     "tailwindcss": "^3.4.14",
     "@vitejs/plugin-react": "^4.3.1",
     "vite": "^5.2.0"
-  }
+  },
+  "keywords": [
+    "cybersecurity",
+    "portfolio",
+    "blog",
+    "ids",
+    "ips",
+    "snort",
+    "blue-team",
+    "hacker-theme",
+    "react",
+    "vite"
+  ]
 }

@@ -1,29 +1,39 @@
-import { Link } from 'react-router-dom';
-import headerButtons from '../data/headerButtons';
+import { Link, useLocation } from 'react-router-dom';
+import { config } from '../config/env';
 
 const Header = () => {
+  const location = useLocation();
+
   return (
-    <header className="fixed top-0 left-0 w-full z-50 sticky top-0 z-20 w-full">
+    <header className="fixed top-0 left-0 w-full z-50 pt-4 px-4 md:px-8">
       {/* Glass full-width bar */}
-      <div className="bg-glass border-b border-green-500/30">
+      <div className="bg-glass border-b border-green-500/30 rounded-lg">
         <div className="w-full px-6 py-3 flex items-center justify-between">
           {/* LEFT: Identity */}
           <Link
             to="/"
-            className="font-mono text-green-400 text-base md:text-lg hover:text-green-300 transition"
+            className="logo-cyber text-green-400 hover:text-green-300 transition"
           >
-            CygnusSec
+            {config.siteName}
           </Link>
 
           {/* RIGHT */}
           <ul className="flex items-center gap-3">
-            {headerButtons.map((btn) => (
-              <li key={btn.name}>
-                <Link to={btn.to} className="btn-menu">
-                  {btn.label}
-                </Link>
-              </li>
-            ))}
+            {config.navButtons.map((btn) => {
+              const isActive = location.pathname === btn.to || 
+                              (btn.to !== '/' && location.pathname.startsWith(btn.to));
+              
+              return (
+                <li key={btn.name}>
+                  <Link 
+                    to={btn.to} 
+                    className={`btn-download ${isActive ? 'active-nav' : ''}`}
+                  >
+                    {btn.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Navigation Config</title>
+</head>
+<body>
+    <h1>Testing Navigation Label Detection</h1>
+    <script type="module">
+        // Simulate the config parsing
+        const navString = "Blog:/blog|Researchs:/projects|Tags:/tags|About:/about";
+        
+        const parseNavButtons = (navString) => {
+            return navString.split('|').map(item => {
+                const [label, path] = item.split(':');
+                return {
+                    name: label.trim(),
+                    label: label.trim(),
+                    to: path.trim(),
+                };
+            });
+        };
+        
+        const navButtons = parseNavButtons(navString);
+        
+        const getPageTitleFromPath = (path) => {
+            const button = navButtons.find(btn => btn.to === path);
+            return button ? button.label : null;
+        };
+        
+        // Test
+        console.log('Navigation Buttons:', navButtons);
+        console.log('Title for /projects:', getPageTitleFromPath('/projects'));
+        
+        document.body.innerHTML += '<pre>' + JSON.stringify(navButtons, null, 2) + '</pre>';
+        document.body.innerHTML += '<p>Title for /projects: <strong>' + getPageTitleFromPath('/projects') + '</strong></p>';
+    </script>
+</body>
+</html>

@@ -1,7 +1,10 @@
 import LinuxImage from '../images/linux.png';
-import TypingText from '../components/TypingText'
+import TypingText from '../components/TypingText';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Home = () => {
+  useDocumentTitle('', true); // Use default site title
+
   return (
     <section className="min-h-screen flex items-center px-[6vw]">
       <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-24 items-center">
@@ -50,7 +53,7 @@ const Home = () => {
             </a>
 
             <a
-              href="/contact"
+              href="/about"
               className="
                 px-6 py-3
                 border border-green-400

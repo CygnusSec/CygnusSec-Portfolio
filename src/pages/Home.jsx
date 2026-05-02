@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import LinuxImage from '../images/linux.png';
 import TypingText from '../components/TypingText';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import { config } from '../config/env';
@@ -85,7 +84,7 @@ const Home = () => {
             overflow-hidden
           ">
             <img
-              src={LinuxImage}
+              src={config.avatarUrl}
               alt="Profile"
               className="w-full h-full object-cover rounded-full"
             />

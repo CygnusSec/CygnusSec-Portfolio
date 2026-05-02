@@ -41,7 +41,7 @@ export const config = {
   get siteName()       { return get('SITE_NAME',        import.meta.env.VITE_SITE_NAME,        'CygnusSec'); },
   get siteTitle()      { return get('SITE_TITLE',       import.meta.env.VITE_SITE_TITLE,       'Dylan Tran | InfoSec Library'); },
   get siteUrl()        { return get('SITE_URL',         import.meta.env.VITE_SITE_URL,         'http://localhost:5173'); },
-  get avatarUrl()      { return get('AVATAR_URL',       import.meta.env.VITE_AVATAR_URL,       'https://i.ibb.co/MBtjqXQ/avatar.jpg'); },
+  get avatarUrl()      { return get('AVATAR_URL',       import.meta.env.VITE_AVATAR_URL,       '/images/avatar.png'); },
   get navButtons()     { return parseNavButtons(get('NAV_BUTTONS', import.meta.env.VITE_NAV_BUTTONS, null)); },
   get gaId()           { return get('GA_ID',            import.meta.env.VITE_GA_ID,            ''); },
   get typingSpeed()    { return parseInt(get('TYPING_SPEED',         import.meta.env.VITE_TYPING_SPEED,         '120')); },

@@ -42,8 +42,8 @@ RUN npm run build
 # ============================
 FROM nginx:alpine
 
-# Install curl for healthcheck
-RUN apk add --no-cache curl
+# Install curl (healthcheck) and envsubst (runtime env injection, part of gettext)
+RUN apk add --no-cache curl gettext
 
 WORKDIR /usr/share/nginx/html
 
@@ -52,6 +52,9 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy built files from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy config template for runtime env injection
+COPY public/config.js.template /usr/share/nginx/html/config.js.template
 
 # Copy custom Nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
@@ -67,7 +70,7 @@ RUN addgroup -g 1001 -S nginx-user && \
     chown -R nginx-user:nginx-user /var/cache/nginx && \
     chown -R nginx-user:nginx-user /var/log/nginx && \
     touch /var/run/nginx.pid && \
-    chown -R nginx-user:nginx-user /var/run/nginx.pid && \
+    chown nginx-user:nginx-user /var/run/nginx.pid && \
     chown nginx-user:nginx-user /docker-entrypoint.sh
 
 # Switch to non-root user

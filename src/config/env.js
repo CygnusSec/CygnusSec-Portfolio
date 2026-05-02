@@ -63,7 +63,7 @@ export const config = {
         username: get('GITHUB_USERNAME', import.meta.env.VITE_GITHUB_USERNAME, 'dylantran'),
       },
       linkedin: {
-        url:      get('LINKEDIN_URL',      import.meta.env.VITE_LINKEDIN_URL,      'https://linkedin.com/in/dylantran'),
+        url:      get('LINKEDIN_URL',      import.meta.env.VITE_LINKEDIN_URL,      'https://www.linkedin.com/in/cygunssec/'),
         username: get('LINKEDIN_USERNAME', import.meta.env.VITE_LINKEDIN_USERNAME, 'dylantran'),
       },
     };

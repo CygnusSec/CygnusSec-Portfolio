@@ -1,5 +1,3 @@
-import React from 'react';
-import LinuxImage from '../images/linux.png';
 import { config } from '../config/env';
 
 const InfoCard = () => {
@@ -7,7 +5,7 @@ const InfoCard = () => {
     <div className="bg-glass shadow-[0_0_20px_rgba(0,255,0,0.25)] rounded-xl p-6 w-full max-w-md mb-10 text-center border border-[#00ff00]/30">
       {/* Avatar với hiệu ứng hacker nhạt */}
       <div className="avatar-matrix">
-        <img src={LinuxImage} alt="Profile" />
+        <img src={config.avatarUrl} alt="Profile" />
       </div>
 
       {/* Tên */}

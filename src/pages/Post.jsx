@@ -44,7 +44,7 @@ const Post = () => {
 
       {/* Header */}
       <header className="mb-8 pb-8 border-b border-green-500/30">
-        <h1 className="text-4xl md:text-5xl font-mono font-bold text-green-400 mb-4">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-mono font-bold text-green-400 mb-4 break-words">
           {post.title}
         </h1>
         <div className="flex flex-wrap items-center gap-3 text-gray-400">
@@ -65,7 +65,7 @@ const Post = () => {
       </header>
 
       {/* Content */}
-      <div className="bg-glass border border-green-500/30 rounded-lg p-8">
+      <div className="bg-glass border border-green-500/30 rounded-lg p-4 md:p-8">
         {content
           ? <MarkdownRenderer content={content} />
           : <p className="text-gray-400">Content coming soon...</p>

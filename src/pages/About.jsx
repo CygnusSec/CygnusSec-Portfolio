@@ -1,6 +1,5 @@
 import { config } from '../config/env';
 import useDocumentTitle from '../hooks/useDocumentTitle';
-import LinuxImage from '../images/linux.png';
 import SkillBar from '../components/SkillBar';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import { bio, expertise } from '../data/about';
@@ -30,7 +29,7 @@ const About = () => {
             {/* Avatar + name */}
             <div className="flex flex-col items-center">
               <div className="avatar-matrix mb-4" style={{ width: '8rem', height: '8rem' }}>
-                <img src={LinuxImage} alt="Profile" />
+                <img src={config.avatarUrl} alt="Profile" />
               </div>
               <h2 className="text-xl font-mono text-green-400 mb-0.5">{config.author.nameEn}</h2>
               <p className="text-green-300/70 text-sm mb-1">{config.author.name}</p>

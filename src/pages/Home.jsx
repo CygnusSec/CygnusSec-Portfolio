@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import LinuxImage from '../images/linux.png';
 import TypingText from '../components/TypingText';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import { config } from '../config/env';
@@ -29,25 +28,25 @@ const Home = () => {
   }, [step]);
 
   return (
-    <section className="h-[calc(100vh-70px)] flex items-center px-[6vw] overflow-hidden">
-      <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-16 items-start">
+    <section className="min-h-[calc(100vh-70px)] flex items-center px-[6vw] overflow-hidden py-8 md:py-0">
+      <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-16 items-center md:items-start">
 
         {/* LEFT */}
-        <div key={key}>
+        <div key={key} className="order-2 md:order-1">
 
           {/* GREETING */}
-          <p className="font-mono text-green-400 text-base mb-2 tracking-widest uppercase">
+          <p className="font-mono text-green-400 text-sm md:text-base mb-2 tracking-widest uppercase">
             <TypingText text="Hi, my name is" speed={SPEED} wordMode onDone={next(1)} />
           </p>
 
           {/* NAME */}
           <h1 className="font-mono font-bold leading-tight mb-4">
-            <div className="text-5xl md:text-6xl text-white">
+            <div className="text-4xl md:text-5xl lg:text-6xl text-white">
               {step >= 1 && (
                 <TypingText text={config.author.nameEn} speed={SPEED} wordMode onDone={next(2)} />
               )}
             </div>
-            <div className="text-2xl md:text-3xl text-green-400 mt-3">
+            <div className="text-xl md:text-2xl lg:text-3xl text-green-400 mt-3">
               {step >= 2 && (
                 <TypingText text={config.author.name} speed={SPEED} wordMode onDone={next(3)} />
               )}
@@ -55,14 +54,14 @@ const Home = () => {
           </h1>
 
           {/* ROLE */}
-          <p className="font-mono text-gray-400 text-sm mb-4 tracking-wide">
+          <p className="font-mono text-gray-400 text-xs md:text-sm mb-4 tracking-wide">
             {step >= 3 && (
               <TypingText text={config.author.position} speed={SPEED} wordMode onDone={next(4)} />
             )}
           </p>
 
           {/* BIO */}
-          <p className="max-w-xl text-base text-gray-300 leading-relaxed">
+          <p className="max-w-xl text-sm md:text-base text-gray-300 leading-relaxed">
             {step >= 4 && (
               <TypingText
                 text="I research and build security systems, DevOps infrastructure, and operational automation. Passionate about exploring technology, sharing knowledge, and continuous learning."
@@ -76,16 +75,16 @@ const Home = () => {
         </div>
 
         {/* RIGHT – AVATAR */}
-        <div className="flex justify-center md:justify-end">
+        <div className="flex justify-center order-1 md:order-2 md:justify-end">
           <div className="
-            w-72 h-72 md:w-96 md:h-96
+            w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96
             rounded-full
-            border-[10px] border-green-400
+            border-[6px] md:border-[10px] border-green-400
             shadow-[0_0_60px_rgba(0,255,0,0.3)]
             overflow-hidden
           ">
             <img
-              src={LinuxImage}
+              src={config.avatarUrl}
               alt="Profile"
               className="w-full h-full object-cover rounded-full"
             />

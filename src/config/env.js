@@ -4,10 +4,11 @@
 // Get runtime config from window.ENV_CONFIG (injected by docker-entrypoint.sh)
 const getRuntimeConfig = () => {
   if (typeof window !== 'undefined' && window.ENV_CONFIG) {
-    // Filter out unresolved placeholders (e.g. when running locally without Docker)
+    // Filter out unresolved placeholders and empty strings
     const cfg = {};
     for (const [key, val] of Object.entries(window.ENV_CONFIG)) {
-      if (typeof val === 'string' && val.startsWith('__') && val.endsWith('__')) continue;
+      if (typeof val === 'string' && (val.startsWith('__') && val.endsWith('__'))) continue;
+      if (val === '' || val === null || val === undefined) continue;
       cfg[key] = val;
     }
     return cfg;

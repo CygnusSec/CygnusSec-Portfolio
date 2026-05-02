@@ -1,5 +1,19 @@
 // Environment configuration
-// All environment variables must be prefixed with VITE_ to be exposed to the client
+// Support both build-time (VITE_*) and runtime (window.ENV_CONFIG) variables
+
+// Get runtime config from window.ENV_CONFIG (injected by docker-entrypoint.sh)
+const getRuntimeConfig = () => {
+  if (typeof window !== 'undefined' && window.ENV_CONFIG) {
+    // Filter out unresolved placeholders (e.g. when running locally without Docker)
+    const cfg = {};
+    for (const [key, val] of Object.entries(window.ENV_CONFIG)) {
+      if (typeof val === 'string' && val.startsWith('__') && val.endsWith('__')) continue;
+      cfg[key] = val;
+    }
+    return cfg;
+  }
+  return {};
+};
 
 // Parse navigation buttons from environment variable
 // Format: "Label:path|Label:path|..."
@@ -24,42 +38,44 @@ const parseNavButtons = (navString) => {
   });
 };
 
+const runtimeConfig = getRuntimeConfig();
+
 export const config = {
-  // Site
-  siteName: import.meta.env.VITE_SITE_NAME || 'CygnusSec',
-  siteTitle: import.meta.env.VITE_SITE_TITLE || 'Dylan Tran | InfoSec Library',
-  siteUrl: import.meta.env.VITE_SITE_URL || 'http://localhost:5173',
+  // Site - Runtime config takes precedence
+  siteName: runtimeConfig.SITE_NAME || import.meta.env.VITE_SITE_NAME || 'CygnusSec',
+  siteTitle: runtimeConfig.SITE_TITLE || import.meta.env.VITE_SITE_TITLE || 'Dylan Tran | InfoSec Library',
+  siteUrl: runtimeConfig.SITE_URL || import.meta.env.VITE_SITE_URL || 'http://localhost:5173',
 
   // Author
   author: {
-    name: import.meta.env.VITE_AUTHOR_NAME || 'Trần Đại Dương',
-    nameEn: import.meta.env.VITE_AUTHOR_NAME_EN || 'Dylan Tran',
-    position: import.meta.env.VITE_AUTHOR_POSITION || 'Researcher - Institute of Information Technology',
-    organization: import.meta.env.VITE_AUTHOR_ORGANIZATION || 'Institute of Information Technology',
-    location: import.meta.env.VITE_AUTHOR_LOCATION || 'Hanoi, Vietnam',
+    name: runtimeConfig.AUTHOR_NAME || import.meta.env.VITE_AUTHOR_NAME || 'Trần Đại Dương',
+    nameEn: runtimeConfig.AUTHOR_NAME_EN || import.meta.env.VITE_AUTHOR_NAME_EN || 'Dylan Tran',
+    position: runtimeConfig.AUTHOR_POSITION || import.meta.env.VITE_AUTHOR_POSITION || 'Researcher - Institute of Information Technology',
+    organization: runtimeConfig.AUTHOR_ORGANIZATION || import.meta.env.VITE_AUTHOR_ORGANIZATION || 'Institute of Information Technology',
+    location: runtimeConfig.AUTHOR_LOCATION || import.meta.env.VITE_AUTHOR_LOCATION || 'Hanoi, Vietnam',
   },
 
   // Contact
   contact: {
-    email: import.meta.env.VITE_EMAIL || 'tdduong@ioit.ac.vn',
+    email: runtimeConfig.EMAIL || import.meta.env.VITE_EMAIL || 'tdduong@ioit.ac.vn',
     github: {
-      url: import.meta.env.VITE_GITHUB_URL || 'https://github.com/dylantran',
-      username: import.meta.env.VITE_GITHUB_USERNAME || 'dylantran',
+      url: runtimeConfig.GITHUB_URL || import.meta.env.VITE_GITHUB_URL || 'https://github.com/dylantran',
+      username: runtimeConfig.GITHUB_USERNAME || import.meta.env.VITE_GITHUB_USERNAME || 'dylantran',
     },
     linkedin: {
-      url: import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/dylantran',
-      username: import.meta.env.VITE_LINKEDIN_USERNAME || 'dylantran',
+      url: runtimeConfig.LINKEDIN_URL || import.meta.env.VITE_LINKEDIN_URL || 'https://linkedin.com/in/dylantran',
+      username: runtimeConfig.LINKEDIN_USERNAME || import.meta.env.VITE_LINKEDIN_USERNAME || 'dylantran',
     },
   },
 
   // Images
-  avatarUrl: import.meta.env.VITE_AVATAR_URL || 'https://i.ibb.co/MBtjqXQ/avatar.jpg',
+  avatarUrl: runtimeConfig.AVATAR_URL || import.meta.env.VITE_AVATAR_URL || 'https://i.ibb.co/MBtjqXQ/avatar.jpg',
 
   // Navigation
-  navButtons: parseNavButtons(import.meta.env.VITE_NAV_BUTTONS),
+  navButtons: parseNavButtons(runtimeConfig.NAV_BUTTONS || import.meta.env.VITE_NAV_BUTTONS),
 
   // Analytics
-  gaId: import.meta.env.VITE_GA_ID,
+  gaId: runtimeConfig.GA_ID || import.meta.env.VITE_GA_ID,
 };
 
 // Helper function to get page title from navigation config based on path

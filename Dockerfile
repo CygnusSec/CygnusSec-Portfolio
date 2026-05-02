@@ -56,6 +56,10 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Copy custom Nginx config
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
+# Copy entrypoint script for runtime env injection
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Add non-root user for security
 RUN addgroup -g 1001 -S nginx-user && \
     adduser -S -D -H -u 1001 -h /var/cache/nginx -s /sbin/nologin -G nginx-user -g nginx-user nginx-user && \
@@ -63,7 +67,8 @@ RUN addgroup -g 1001 -S nginx-user && \
     chown -R nginx-user:nginx-user /var/cache/nginx && \
     chown -R nginx-user:nginx-user /var/log/nginx && \
     touch /var/run/nginx.pid && \
-    chown -R nginx-user:nginx-user /var/run/nginx.pid
+    chown -R nginx-user:nginx-user /var/run/nginx.pid && \
+    chown nginx-user:nginx-user /docker-entrypoint.sh
 
 # Switch to non-root user
 USER nginx-user
@@ -75,5 +80,5 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8080/ || exit 1
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Use entrypoint script to inject runtime env vars
+ENTRYPOINT ["/docker-entrypoint.sh"]

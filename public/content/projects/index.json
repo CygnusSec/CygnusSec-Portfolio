@@ -1,0 +1,33 @@
+[
+  {
+    "id": "ids-ips",
+    "label": "IDS/IPS Research",
+    "hasPdfs": true,
+    "skills": [
+      { "name": "Snort IDS/IPS",        "level": 95 },
+      { "name": "Wireshark",             "level": 90 },
+      { "name": "iptables/Firewall",     "level": 85 },
+      { "name": "Linux (Ubuntu/Debian)", "level": 95 },
+      { "name": "Python (Automation)",   "level": 85 },
+      { "name": "Bash Scripting",        "level": 90 }
+    ]
+  },
+  {
+    "id": "network-security",
+    "label": "Network Security",
+    "hasPdfs": false,
+    "skills": []
+  },
+  {
+    "id": "blue-team",
+    "label": "Blue Team Labs",
+    "hasPdfs": false,
+    "skills": []
+  },
+  {
+    "id": "tools",
+    "label": "Security Tools",
+    "hasPdfs": false,
+    "skills": []
+  }
+]

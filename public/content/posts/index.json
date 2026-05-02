@@ -1,0 +1,44 @@
+[
+  {
+    "slug": "why-i-started-this-blog",
+    "title": "Why I Started This Blog",
+    "date": "2026-05-01",
+    "tags": ["Personal", "Life"],
+    "excerpt": "A little introduction to who I am, why I decided to start writing, and what you can expect to find here."
+  },
+  {
+    "slug": "home-lab-getting-started",
+    "title": "Building a Home Lab: Where to Start",
+    "date": "2026-04-20",
+    "tags": ["Technology", "Infrastructure", "DevOps"],
+    "excerpt": "Setting up a home lab is one of the best investments you can make as someone working in tech. Here is how I approached mine."
+  },
+  {
+    "slug": "deep-vs-broad-learning",
+    "title": "On Learning Things Deeply vs. Broadly",
+    "date": "2026-04-10",
+    "tags": ["Personal", "Learning", "Science"],
+    "excerpt": "There is a constant tension between going deep on one thing and staying broad across many. I have been thinking about how to navigate that."
+  },
+  {
+    "slug": "docker-compose-automation",
+    "title": "Automating Infrastructure with Docker and Compose",
+    "date": "2026-03-28",
+    "tags": ["Technology", "DevOps", "Automation"],
+    "excerpt": "Docker Compose changed how I think about deploying services. Here is a practical look at how I use it to manage my infrastructure."
+  },
+  {
+    "slug": "linux-lessons",
+    "title": "Things I Wish I Knew Earlier About Linux",
+    "date": "2026-03-10",
+    "tags": ["Technology", "Linux", "Learning"],
+    "excerpt": "After years of working with Linux daily, here are the things that took me too long to learn and would have saved me a lot of time."
+  },
+  {
+    "slug": "scientific-curiosity",
+    "title": "A Few Thoughts on Scientific Curiosity",
+    "date": "2026-02-15",
+    "tags": ["Science", "Personal", "Learning"],
+    "excerpt": "Science is not just a profession or a method. It is a way of engaging with the world. Some thoughts on keeping that curiosity alive."
+  }
+]

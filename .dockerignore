@@ -27,10 +27,26 @@ build
 .DS_Store
 Thumbs.db
 
-# Environment
+# Environment (CRITICAL - never include in Docker image)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+
+# Security sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+private/
+*.secret
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.tmp
+*.temp
 
 # Documentation (keep essential files)
 # README.md
@@ -49,6 +65,23 @@ docker-compose.yaml
 # Testing
 coverage
 .nyc_output
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# Development tools
+.eslintrc*
+.prettierrc*
+jest.config.*
+cypress/
+playwright/
+
+# Scripts that shouldn't be in production
+scripts/
+tools/
+dev-tools/
 
 # Misc
 *.log

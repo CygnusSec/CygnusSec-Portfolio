@@ -13,11 +13,9 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  color: #e0f7ff;
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  background: #000;
 }
 
 html {
@@ -196,4 +194,108 @@ html {
 /* Typography */
 h2, h3 {
   color: #00ffcc;
+}
+
+/* =============================================
+   🌙 / ☀️  THEME TOGGLE
+   ============================================= */
+
+/* Default = dark (no class needed) */
+:root {
+  --bg-body:        #000000;
+  --bg-glass:       rgba(10, 25, 47, 0.85);
+  --bg-glass-hover: rgba(10, 25, 47, 0.95);
+  --border-glass:   rgba(0, 255, 0, 0.2);
+  --shadow-glass:   0 0 15px rgba(0, 255, 0, 0.15), inset 0 0 20px rgba(0, 255, 0, 0.05);
+  --shadow-hover:   0 0 25px rgba(0, 255, 0, 0.3);
+  --text-body:      #e0f7ff;
+  --overlay-from:   rgba(2, 4, 9, 0.75);
+  --overlay-to:     rgba(2, 4, 9, 0.85);
+  --accent:         #00ff00;
+  --heading:        #00ffcc;
+}
+
+/* Light mode overrides */
+html.light {
+  --bg-body:        #f0f4f8;
+  --bg-glass:       rgba(255, 255, 255, 0.85);
+  --bg-glass-hover: rgba(255, 255, 255, 0.98);
+  --border-glass:   rgba(0, 120, 80, 0.25);
+  --shadow-glass:   0 0 15px rgba(0, 150, 100, 0.1), inset 0 0 20px rgba(0, 150, 100, 0.04);
+  --shadow-hover:   0 4px 20px rgba(0, 120, 80, 0.2);
+  --text-body:      #1a2e1a;
+  --overlay-from:   rgba(240, 244, 248, 0.6);
+  --overlay-to:     rgba(240, 244, 248, 0.75);
+  --accent:         #007a50;
+  --heading:        #005f3f;
+}
+
+body {
+  background: var(--bg-body);
+  color: var(--text-body);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.bg-glass {
+  background: var(--bg-glass) !important;
+  border-color: var(--border-glass) !important;
+  box-shadow: var(--shadow-glass) !important;
+}
+
+.bg-glass:hover {
+  background: var(--bg-glass-hover) !important;
+  box-shadow: var(--shadow-hover) !important;
+}
+
+.matrix-overlay {
+  background: linear-gradient(to bottom, var(--overlay-from), var(--overlay-to)) !important;
+}
+
+/* Light mode text overrides */
+html.light h2,
+html.light h3 {
+  color: var(--heading);
+}
+
+html.light .text-green-400 { color: #007a50 !important; }
+html.light .text-green-300 { color: #009060 !important; }
+html.light .text-green-500 { color: #006040 !important; }
+html.light .text-gray-400  { color: #4a5568 !important; }
+html.light .text-gray-300  { color: #2d3748 !important; }
+html.light .text-gray-500  { color: #718096 !important; }
+html.light .text-gray-600  { color: #4a5568 !important; }
+html.light .text-white     { color: #1a202c !important; }
+html.light .border-green-500\/30 { border-color: rgba(0, 120, 80, 0.25) !important; }
+html.light .border-green-400     { border-color: #007a50 !important; }
+html.light .bg-green-500\/10     { background: rgba(0, 120, 80, 0.08) !important; }
+html.light .bg-green-500\/30     { background: rgba(0, 120, 80, 0.15) !important; }
+html.light .bg-black\/50         { background: rgba(0, 0, 0, 0.08) !important; }
+html.light .bg-black\/30         { background: rgba(0, 0, 0, 0.05) !important; }
+html.light .from-green-500       { --tw-gradient-from: #007a50 !important; }
+html.light .to-green-400         { --tw-gradient-to: #009060 !important; }
+
+/* Light mode matrix background — subtle grid instead of falling chars */
+html.light .matrix-overlay {
+  opacity: 0.4;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1px solid var(--border-glass);
+  background: var(--bg-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  box-shadow: var(--shadow-hover);
+  transform: scale(1.1);
 }

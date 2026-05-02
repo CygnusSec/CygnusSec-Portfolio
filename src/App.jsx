@@ -7,48 +7,44 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Post from './pages/Post';
 import About from './pages/About';
-import Blog from './pages/Blog';
-import Tags from './pages/Tags';
+import Posts from './pages/Posts';
 import Projects from './pages/Projects';
 
 const App = () => {
   return (
     <>
-      {/* FIXED HEADER */}
       <Header />
 
-      {/* BACKGROUND */}
       <MatrixBackground />
       <div className="matrix-overlay" />
 
-      {/* CONTENT */}
-      <div className="relative z-10 pt-[88px]">
+      <div className="relative z-10 pt-[70px]">
         <Routes>
           <Route path="/" element={<Home />} />
 
           <Route
             path="/about"
             element={
-              <main className="max-w-5xl mx-auto px-6 py-16">
+              <main className="px-12 py-16">
                 <About />
               </main>
             }
           />
 
           <Route
-            path="/researches"
+            path="/projects"
             element={
-              <main className="max-w-5xl mx-auto px-6 py-16">
+              <main className="px-12 py-16">
                 <Projects />
               </main>
             }
           />
 
           <Route
-            path="/blog"
+            path="/posts"
             element={
-              <main className="max-w-4xl mx-auto px-6 py-16">
-                <Blog />
+              <main className="px-12 py-16">
+                <Posts />
               </main>
             }
           />
@@ -56,17 +52,8 @@ const App = () => {
           <Route
             path="/post/:slug"
             element={
-              <main className="max-w-4xl mx-auto px-6 py-16">
+              <main className="px-12 py-16">
                 <Post />
-              </main>
-            }
-          />
-
-          <Route
-            path="/tags"
-            element={
-              <main className="max-w-4xl mx-auto px-6 py-16">
-                <Tags />
               </main>
             }
           />

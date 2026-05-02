@@ -26,6 +26,9 @@ services:
       - .env
     ports:
       - "127.0.0.1:8001:8080"
+    volumes:
+      # Named volume — quản lý bởi Docker, không phụ thuộc đường dẫn host
+      - cygnussec-content:/usr/share/nginx/html/content
     # Runtime environment variables - có thể đổi động
     environment:
       - VITE_SITE_NAME=${VITE_SITE_NAME}
@@ -74,3 +77,7 @@ services:
 networks:
   cygnussec-network:
     driver: bridge
+
+volumes:
+  cygnussec-content:
+    driver: local

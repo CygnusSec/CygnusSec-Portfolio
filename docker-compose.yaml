@@ -24,6 +24,8 @@ services:
     container_name: cygnussec-web
     ports:
       - "${PORT:-8080}:8080"
+    volumes:
+      - cygnussec-content:/usr/share/nginx/html/content
     # Runtime environment variables - có thể đổi mà không cần rebuild
     environment:
       - VITE_SITE_NAME=${VITE_SITE_NAME:-Cygnus Security}
@@ -58,3 +60,7 @@ services:
 networks:
   cygnussec-network:
     driver: bridge
+
+volumes:
+  cygnussec-content:
+    driver: local

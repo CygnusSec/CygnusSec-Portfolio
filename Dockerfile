@@ -53,6 +53,9 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy built files from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copy content to seed directory (will be copied to volume on first run)
+COPY public/content /usr/share/nginx/html/content-seed
+
 # Copy config template for runtime env injection
 COPY public/config.js.template /usr/share/nginx/html/config.js.template
 
@@ -71,7 +74,9 @@ RUN addgroup -g 1001 -S nginx-user && \
     chown -R nginx-user:nginx-user /var/log/nginx && \
     touch /var/run/nginx.pid && \
     chown nginx-user:nginx-user /var/run/nginx.pid && \
-    chown nginx-user:nginx-user /docker-entrypoint.sh
+    chown nginx-user:nginx-user /docker-entrypoint.sh && \
+    mkdir -p /usr/share/nginx/html/content && \
+    chown nginx-user:nginx-user /usr/share/nginx/html/content
 
 # Switch to non-root user
 USER nginx-user

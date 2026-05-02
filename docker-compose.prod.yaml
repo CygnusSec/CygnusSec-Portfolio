@@ -22,6 +22,8 @@ services:
         VITE_GA_ID: ${VITE_GA_ID}
     image: cygnussec/web:latest
     container_name: cygnussec-web-prod
+    env_file:
+      - .env
     ports:
       - "127.0.0.1:8001:8080"
     # Runtime environment variables - có thể đổi động

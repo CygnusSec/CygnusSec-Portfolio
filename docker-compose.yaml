@@ -1,9 +1,44 @@
 version: "3.9"
 
 services:
-  my_ids_ips:
-    build: .
-    container_name: my_ids_ips
+  cygnussec-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Pass environment variables to build
+        VITE_SITE_NAME: ${VITE_SITE_NAME:-Cygnus Security}
+        VITE_SITE_TITLE: ${VITE_SITE_TITLE:-Dylan Tran | CygnusSec}
+        VITE_SITE_URL: ${VITE_SITE_URL:-http://localhost:8080}
+        VITE_AUTHOR_NAME: ${VITE_AUTHOR_NAME:-Trần Đại Dương}
+        VITE_AUTHOR_NAME_EN: ${VITE_AUTHOR_NAME_EN:-Dylan Tran}
+        VITE_AUTHOR_POSITION: ${VITE_AUTHOR_POSITION:-Researcher - Institute of Information Technology}
+        VITE_AUTHOR_ORGANIZATION: ${VITE_AUTHOR_ORGANIZATION:-Institute of Information Technology}
+        VITE_AUTHOR_LOCATION: ${VITE_AUTHOR_LOCATION:-Hanoi, Vietnam}
+        VITE_EMAIL: ${VITE_EMAIL:-dylan@cygnussec.com}
+        VITE_GITHUB_URL: ${VITE_GITHUB_URL:-https://github.com/CygnusSec}
+        VITE_GITHUB_USERNAME: ${VITE_GITHUB_USERNAME:-CygnusSec}
+        VITE_LINKEDIN_URL: ${VITE_LINKEDIN_URL:-https://linkedin.com/in/dylantran}
+        VITE_LINKEDIN_USERNAME: ${VITE_LINKEDIN_USERNAME:-dylantran}
+        VITE_AVATAR_URL: ${VITE_AVATAR_URL:-https://i.ibb.co/MBtjqXQ/avatar.jpg}
+        VITE_NAV_BUTTONS: ${VITE_NAV_BUTTONS:-Blog:/blog|Researchs:/researches|Tags:/tags|About:/about}
+        VITE_GA_ID: ${VITE_GA_ID}
+    container_name: cygnussec-web
     ports:
-      - "8080:80"
+      - "${PORT:-8080}:8080"
     restart: unless-stopped
+    networks:
+      - cygnussec-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    labels:
+      - "com.cygnussec.description=CygnusSec Portfolio & Blog"
+      - "com.cygnussec.version=2.3.0"
+
+networks:
+  cygnussec-network:
+    driver: bridge

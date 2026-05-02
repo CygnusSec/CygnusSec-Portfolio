@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  cygnussec-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_SITE_NAME: ${VITE_SITE_NAME}
+        VITE_SITE_TITLE: ${VITE_SITE_TITLE}
+        VITE_SITE_URL: ${VITE_SITE_URL}
+        VITE_AUTHOR_NAME: ${VITE_AUTHOR_NAME}
+        VITE_AUTHOR_NAME_EN: ${VITE_AUTHOR_NAME_EN}
+        VITE_AUTHOR_POSITION: ${VITE_AUTHOR_POSITION}
+        VITE_AUTHOR_ORGANIZATION: ${VITE_AUTHOR_ORGANIZATION}
+        VITE_AUTHOR_LOCATION: ${VITE_AUTHOR_LOCATION}
+        VITE_EMAIL: ${VITE_EMAIL}
+        VITE_GITHUB_URL: ${VITE_GITHUB_URL}
+        VITE_GITHUB_USERNAME: ${VITE_GITHUB_USERNAME}
+        VITE_LINKEDIN_URL: ${VITE_LINKEDIN_URL}
+        VITE_LINKEDIN_USERNAME: ${VITE_LINKEDIN_USERNAME}
+        VITE_AVATAR_URL: ${VITE_AVATAR_URL}
+        VITE_NAV_BUTTONS: ${VITE_NAV_BUTTONS}
+        VITE_GA_ID: ${VITE_GA_ID}
+    image: cygnussec/web:latest
+    container_name: cygnussec-web-prod
+    ports:
+      - "80:8080"
+    restart: always
+    networks:
+      - cygnussec-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    labels:
+      - "com.cygnussec.description=CygnusSec Portfolio & Blog - Production"
+      - "com.cygnussec.version=2.3.0"
+      - "com.cygnussec.environment=production"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  cygnussec-network:
+    driver: bridge

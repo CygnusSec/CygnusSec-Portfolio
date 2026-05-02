@@ -1216,7 +1216,42 @@ const Messages = () => {
 
 ## 🚀 Deployment
 
-### Option 1: Vercel (Recommended)
+### Option 1: Docker (Recommended for Production) 🐳
+
+**Quick Start:**
+
+```bash
+# Development
+make dev
+# Access at http://localhost:8080
+
+# Production
+make prod
+# Access at http://localhost
+```
+
+**Using Docker Compose:**
+
+```bash
+# Development
+docker-compose up --build
+
+# Production
+docker-compose -f docker-compose.prod.yaml up --build -d
+```
+
+**Features:**
+- ✅ Multi-stage build (optimized size ~25MB)
+- ✅ Non-root user for security
+- ✅ Health checks
+- ✅ Nginx with caching & compression
+- ✅ Environment variables support
+- ✅ Resource limits
+- ✅ Auto-restart
+
+**See [DOCKER_DEPLOYMENT.md](DOCKER_DEPLOYMENT.md) for detailed guide.**
+
+### Option 2: Vercel
 
 **Method 1: GitHub Integration**
 1. Push code to GitHub
@@ -1227,7 +1262,8 @@ const Messages = () => {
    - Framework Preset: **Vite**
    - Build Command: `npm run build`
    - Output Directory: `dist`
-6. Click "Deploy"
+6. Add environment variables from `.env.example`
+7. Click "Deploy"
 
 **Method 2: Vercel CLI**
 ```bash
@@ -1236,7 +1272,7 @@ vercel login
 vercel --prod
 ```
 
-### Option 2: Netlify
+### Option 3: Netlify
 
 **Method 1: Drag & Drop**
 ```bash
@@ -1252,6 +1288,7 @@ npm run build
 5. Configure:
    - Build command: `npm run build`
    - Publish directory: `dist`
+6. Add environment variables
 
 **Method 3: Netlify CLI**
 ```bash
@@ -1261,25 +1298,373 @@ npm run build
 netlify deploy --prod
 ```
 
-### Option 3: Docker
+---
 
-**Docker Compose (Recommended)**
+## 🐳 Docker Deployment Guide
+
+### Quick Start
+
+**Development:**
 ```bash
+# Using Make
+make dev
+
+# Or Docker Compose
 docker-compose up --build
+
 # Access at http://localhost:8080
 ```
 
-**Docker CLI**
+**Production:**
 ```bash
-# Build image
-docker build -t cygnus-sec .
+# Using Make
+make prod
 
-# Run container
-docker run -d -p 8080:80 --name cygnus-sec cygnus-sec
+# Or Docker Compose
+docker-compose -f docker-compose.prod.yaml up --build -d
 
-# Production with restart policy
-docker run -d \
-  -p 80:80 \
+# Access at http://localhost
+```
+
+### Prerequisites
+
+- Docker 20.10+
+- Docker Compose 2.0+
+- Make (optional, for convenience)
+
+### Make Commands
+
+| Command | Description |
+|---------|-------------|
+| `make dev` | Start development environment |
+| `make prod` | Start production environment |
+| `make logs` | View container logs |
+| `make logs-prod` | View production logs |
+| `make down` | Stop development containers |
+| `make prod-down` | Stop production containers |
+| `make clean` | Remove containers and images |
+| `make shell` | Open shell in container |
+| `make health` | Check service health |
+
+### Docker Image Details
+
+**Multi-stage Build:**
+
+1. **Stage 1: Builder**
+   - Base: `node:22-alpine`
+   - Installs dependencies
+   - Builds React app with Vite
+   - Output: `/app/dist`
+
+2. **Stage 2: Production**
+   - Base: `nginx:alpine`
+   - Copies built files from Stage 1
+   - Runs as non-root user (nginx-user, UID 1001)
+   - Exposes port 8080
+   - Includes health check
+
+**Image Size:**
+- Builder stage: ~500MB (discarded)
+- Final image: ~25MB (nginx + static files)
+
+### Configuration
+
+**Nginx Features:**
+- Port 8080 (non-root compatible)
+- SPA routing (all routes serve index.html)
+- Gzip compression
+- Static asset caching:
+  - JS/CSS: 1 year
+  - Images: 30 days
+  - PDFs: 7 days
+- Security headers (X-Frame-Options, X-Content-Type-Options, etc.)
+
+**Docker Compose:**
+
+**Development (`docker-compose.yaml`):**
+- Port: 8080:8080
+- Restart: unless-stopped
+- Health check: enabled
+- Network: cygnussec-network
+
+**Production (`docker-compose.prod.yaml`):**
+- Ports: 80:8080, 443:8080
+- Restart: always
+- Resource limits: 1 CPU, 512MB RAM
+- Logging: 10MB max, 3 files
+- Health check: enabled
+
+### Environment Variables
+
+Environment variables are passed as build arguments:
+
+```bash
+# Edit .env file
+cp .env.example .env
+nano .env
+
+# Build with environment variables
+docker-compose up --build
+```
+
+All `VITE_*` variables from `.env` are automatically passed to the build.
+
+### Docker Commands Reference
+
+**Build:**
+```bash
+# Development
+docker-compose build
+
+# Production
+docker-compose -f docker-compose.prod.yaml build
+
+# Without cache
+docker-compose build --no-cache
+```
+
+**Run:**
+```bash
+# Development (foreground)
+docker-compose up
+
+# Development (background)
+docker-compose up -d
+
+# Production
+docker-compose -f docker-compose.prod.yaml up -d
+```
+
+**Logs:**
+```bash
+# View logs
+docker-compose logs -f
+
+# Last 100 lines
+docker logs --tail 100 cygnussec-web
+
+# Since timestamp
+docker logs --since 2024-01-01T00:00:00 cygnussec-web
+```
+
+**Stop:**
+```bash
+# Development
+docker-compose down
+
+# Production
+docker-compose -f docker-compose.prod.yaml down
+
+# Remove volumes
+docker-compose down -v
+```
+
+**Shell Access:**
+```bash
+# Development
+docker exec -it cygnussec-web sh
+
+# Production
+docker exec -it cygnussec-web-prod sh
+```
+
+### Health Check
+
+The container includes automatic health checks:
+
+```bash
+# Check health status
+docker ps
+
+# View health check logs
+docker inspect cygnussec-web | grep -A 10 Health
+
+# Manual health check
+curl -f http://localhost:8080/
+```
+
+### Production Deployment
+
+**VPS/Server Deployment:**
+
+1. **Install Docker:**
+   ```bash
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sh get-docker.sh
+   ```
+
+2. **Clone repository:**
+   ```bash
+   git clone <your-repo>
+   cd <your-repo>
+   ```
+
+3. **Configure environment:**
+   ```bash
+   cp .env.example .env
+   nano .env
+   ```
+
+4. **Deploy:**
+   ```bash
+   make prod
+   ```
+
+5. **Verify:**
+   ```bash
+   make health-prod
+   ```
+
+**With Reverse Proxy (Nginx):**
+
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+**With SSL/TLS (Let's Encrypt):**
+
+```bash
+# Install certbot
+apt-get install certbot python3-certbot-nginx
+
+# Get certificate
+certbot --nginx -d yourdomain.com
+
+# Auto-renewal
+certbot renew --dry-run
+```
+
+### Troubleshooting
+
+**Container won't start:**
+```bash
+# Check logs
+docker logs cygnussec-web
+
+# Check if port is in use
+lsof -i :8080
+
+# Rebuild without cache
+docker-compose build --no-cache
+```
+
+**Environment variables not working:**
+```bash
+# Verify .env file exists
+cat .env
+
+# Rebuild with new env vars
+docker-compose down
+docker-compose up --build
+```
+
+**Permission issues:**
+```bash
+# Check file permissions
+docker exec cygnussec-web ls -la /usr/share/nginx/html
+
+# Rebuild
+docker-compose build --no-cache
+```
+
+**Health check failing:**
+```bash
+# Check if nginx is running
+docker exec cygnussec-web ps aux
+
+# Test health check manually
+docker exec cygnussec-web curl -f http://localhost:8080/
+
+# Check nginx logs
+docker exec cygnussec-web cat /var/log/nginx/error.log
+```
+
+### Monitoring
+
+**View Logs:**
+```bash
+# Real-time logs
+make logs
+
+# Last 100 lines
+docker logs --tail 100 cygnussec-web
+```
+
+**Resource Usage:**
+```bash
+# Container stats
+docker stats cygnussec-web
+
+# Disk usage
+docker system df
+```
+
+**Health Status:**
+```bash
+# Container health
+docker inspect cygnussec-web | grep -A 10 Health
+
+# Service health
+curl -I http://localhost:8080/
+```
+
+### Cleanup
+
+```bash
+# Stop and remove containers
+make clean
+
+# Remove all unused Docker resources
+docker system prune -a --volumes
+
+# Remove specific image
+docker rmi cygnussec/web:latest
+```
+
+### Security Features
+
+✅ **Implemented:**
+- Multi-stage build (smaller attack surface)
+- Non-root user (nginx-user)
+- Security headers (X-Frame-Options, X-Content-Type-Options, X-XSS-Protection)
+- Health checks
+- Resource limits
+- Log rotation
+
+🔒 **Recommended:**
+- Use HTTPS in production
+- Keep Docker and base images updated
+- Scan images for vulnerabilities
+- Use secrets management for sensitive data
+- Enable Docker Content Trust
+
+### Performance Optimization
+
+✅ **Implemented:**
+- Gzip compression
+- Static asset caching
+- Optimized nginx config
+- Multi-stage build
+- .dockerignore for faster builds
+
+📈 **Additional Recommendations:**
+- Use CDN for static assets
+- Enable HTTP/2
+- Implement rate limiting
+- Use Redis for caching (if needed)
+
+---
   --name cygnus-sec \
   --restart unless-stopped \
   cygnus-sec
@@ -1489,19 +1874,44 @@ dist/
 
 ### [2.3.0] - 2026-05-02
 
+#### Added
+- 🐳 **Production-ready Docker setup** with multi-stage build
+- 📝 `Makefile` for easy Docker commands (dev, prod, logs, clean, health)
+- 📄 `docker-compose.prod.yaml` for production deployment
+- 📖 **Complete Docker documentation** merged into README.md
+- 🔒 Non-root user in Docker container for security (nginx-user, UID 1001)
+- 🏥 Health checks for container monitoring (30s interval)
+- 📦 `.dockerignore` for optimized build context
+- 🗜️ Gzip compression in Nginx
+- 🔐 Security headers in Nginx config (X-Frame-Options, X-Content-Type-Options, etc.)
+- 📊 Resource limits in production compose (1 CPU, 512MB RAM)
+- 📝 Log rotation (10MB max, 3 files)
+- 🎯 Static asset caching (JS/CSS: 1y, Images: 30d, PDFs: 7d)
+
 #### Changed
 - 🔄 **Route Change**: `/projects` → `/researches` across entire project
 - 📝 Updated all navigation configs to use `/researches`
 - 🔗 Updated all internal links from `/projects` to `/researches`
 - 📚 Updated README.md examples with new route
+- 🐳 Nginx now runs on port 8080 (non-root compatible)
+- 🔧 Optimized Dockerfile with better caching and smaller layers
+- 📦 Smaller final Docker image (~25MB vs ~500MB builder)
+- 📖 **Consolidated documentation** - all Docker guides now in README.md
+
+#### Files Added
+- `Makefile` - Docker command shortcuts
+- `docker-compose.prod.yaml` - Production configuration
+- `.dockerignore` - Build optimization
 
 #### Files Updated
-- `src/App.jsx` - Route definition
-- `src/config/env.js` - Default navigation config
-- `src/pages/About.jsx` - Quick links
-- `.env` - Navigation buttons
-- `.env.example` - Navigation buttons
-- `README.md` - All documentation examples
+- `Dockerfile` - Multi-stage build with security improvements
+- `docker-compose.yaml` - Development configuration
+- `nginx/default.conf` - Port 8080, caching, security headers
+- `README.md` - Complete Docker deployment guide (merged from separate files)
+
+#### Files Removed
+- ❌ `DOCKER_DEPLOYMENT.md` - Merged into README.md
+- ❌ `DOCKER_QUICKSTART.md` - Merged into README.md
 
 ### [2.2.2] - 2026-05-02
 

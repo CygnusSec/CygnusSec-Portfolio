@@ -23,7 +23,25 @@ services:
     image: cygnussec/web:latest
     container_name: cygnussec-web-prod
     ports:
-      - "80:8080"
+      - "127.0.0.1:8001:8080"
+    # Runtime environment variables - có thể đổi động
+    environment:
+      - VITE_SITE_NAME=${VITE_SITE_NAME}
+      - VITE_SITE_TITLE=${VITE_SITE_TITLE}
+      - VITE_SITE_URL=${VITE_SITE_URL}
+      - VITE_AUTHOR_NAME=${VITE_AUTHOR_NAME}
+      - VITE_AUTHOR_NAME_EN=${VITE_AUTHOR_NAME_EN}
+      - VITE_AUTHOR_POSITION=${VITE_AUTHOR_POSITION}
+      - VITE_AUTHOR_ORGANIZATION=${VITE_AUTHOR_ORGANIZATION}
+      - VITE_AUTHOR_LOCATION=${VITE_AUTHOR_LOCATION}
+      - VITE_EMAIL=${VITE_EMAIL}
+      - VITE_GITHUB_URL=${VITE_GITHUB_URL}
+      - VITE_GITHUB_USERNAME=${VITE_GITHUB_USERNAME}
+      - VITE_LINKEDIN_URL=${VITE_LINKEDIN_URL}
+      - VITE_LINKEDIN_USERNAME=${VITE_LINKEDIN_USERNAME}
+      - VITE_AVATAR_URL=${VITE_AVATAR_URL}
+      - VITE_NAV_BUTTONS=${VITE_NAV_BUTTONS}
+      - VITE_GA_ID=${VITE_GA_ID}
     restart: always
     networks:
       - cygnussec-network

@@ -1,205 +1,172 @@
 const posts = [
   {
-    title: 'Writing Custom Snort Rules for Network Security',
-    slug: 'snort-rules',
-    date: '2026-02-01',
-    tags: ['IDS', 'Snort', 'Blue Team'],
-    excerpt: 'Learn how to write effective Snort rules to detect port scans, DDoS attacks, and backdoor attempts. Includes real-world examples and best practices.',
+    title: 'Why I Started This Blog',
+    slug: 'why-i-started-this-blog',
+    date: '2026-05-01',
+    tags: ['Personal', 'Life'],
+    excerpt: 'A little introduction to who I am, why I decided to start writing, and what you can expect to find here.',
     content: `
-# Writing Custom Snort Rules
+# Why I Started This Blog
 
-Snort is one of the most powerful open-source IDS/IPS tools available. In this guide, we'll explore how to write custom detection rules.
+For a long time, I kept notes scattered across notebooks, text files, and random apps. Ideas about systems I was building, things I was learning, questions I couldn't stop thinking about. At some point it felt wasteful to keep all of that to myself.
 
-## Rule Structure
+This blog is my way of thinking out loud. Some posts will be technical — infrastructure, security, automation. Others will be more personal — reflections on work, learning, and the things that keep me curious.
 
-A Snort rule consists of two main parts:
-- **Rule Header**: Defines action, protocol, IPs, and ports
-- **Rule Options**: Specifies detection criteria
+I'm not writing to be an authority on anything. I'm writing because the act of writing forces clarity, and clarity is something I'm always chasing.
 
-## Example: Detecting TCP SYN Flood
-
-\`\`\`
-alert tcp any any -> $HOME_NET 80 (msg:"Possible TCP SYN Flood"; flags:S; detection_filter:track by_src, count 20, seconds 1; sid:1000004; rev:1;)
-\`\`\`
-
-This rule triggers when 20 SYN packets hit port 80 within 1 second from the same source.
-
-## Best Practices
-
-1. Use unique SIDs (start from 1000000 for custom rules)
-2. Always include descriptive messages
-3. Test rules in a lab environment first
-4. Use thresholds to reduce false positives
+If something here is useful to you, that's a bonus.
     `
   },
   {
-    title: 'Building an IDS Lab on Ubuntu',
-    slug: 'ids-lab',
-    date: '2026-01-25',
-    tags: ['Linux', 'IDS', 'Lab'],
-    excerpt: 'Step-by-step guide to building a complete blue team security lab using Ubuntu, Snort, and virtual machines for hands-on practice.',
+    title: 'Building a Home Lab: Where to Start',
+    slug: 'home-lab-getting-started',
+    date: '2026-04-20',
+    tags: ['Technology', 'Infrastructure', 'DevOps'],
+    excerpt: 'Setting up a home lab is one of the best investments you can make as someone working in tech. Here is how I approached mine.',
     content: `
-# Building an IDS Lab on Ubuntu
+# Building a Home Lab: Where to Start
 
-Setting up a security lab is essential for learning IDS/IPS concepts. Here's how to build one from scratch.
+A home lab is just a personal environment where you can experiment freely — break things, fix them, and learn without consequences.
 
-## Requirements
+## What I Started With
 
-- Ubuntu 22.04 LTS
-- VirtualBox or VMware
-- At least 8GB RAM
-- 50GB disk space
+- An old desktop with 16GB RAM
+- A cheap managed switch
+- A few Raspberry Pis
+- VirtualBox for quick VMs
 
-## Step 1: Install Snort
+## What I Run Now
 
-\`\`\`bash
-sudo apt update
-sudo apt install snort -y
-\`\`\`
+Over time the lab evolved. I moved to Proxmox for virtualization, added a NAS for storage, and started running services in Docker containers. Nothing fancy — just enough to mirror real-world infrastructure at a small scale.
 
-## Step 2: Configure Network Interface
+## Why It Matters
 
-Edit \`/etc/snort/snort.conf\` and set your HOME_NET variable:
+The gap between reading about something and actually running it is enormous. A home lab closes that gap. You learn how things fail, how they interact, and how to think about them as systems rather than isolated components.
 
-\`\`\`
-ipvar HOME_NET 192.168.1.0/24
-\`\`\`
-
-## Step 3: Test Your Setup
-
-Run Snort in test mode:
-
-\`\`\`bash
-sudo snort -T -c /etc/snort/snort.conf
-\`\`\`
-
-## Next Steps
-
-- Add custom rules
-- Set up logging
-- Configure alerting
+Start small. A single machine running a few VMs is enough to learn a tremendous amount.
     `
   },
   {
-    title: 'Understanding iptables Firewall Rules',
-    slug: 'iptables-guide',
-    date: '2026-01-15',
-    tags: ['Linux', 'Firewall', 'Blue Team'],
-    excerpt: 'Master Linux firewall configuration with iptables. Learn how to create rules, manage chains, and secure your network infrastructure.',
+    title: 'On Learning Things Deeply vs. Broadly',
+    slug: 'deep-vs-broad-learning',
+    date: '2026-04-10',
+    tags: ['Personal', 'Learning', 'Science'],
+    excerpt: 'There is a constant tension between going deep on one thing and staying broad across many. I have been thinking about how to navigate that.',
     content: `
-# Understanding iptables Firewall Rules
+# On Learning Things Deeply vs. Broadly
 
-iptables is the standard firewall tool for Linux systems. Let's explore how to use it effectively.
+I have always been drawn to breadth. Cybersecurity, infrastructure, physics, mathematics, biology — I find it hard to stay in one lane. But breadth without depth can leave you feeling like you know a little about everything and a lot about nothing.
 
-## Basic Concepts
+## The Case for Depth
 
-- **Tables**: filter, nat, mangle, raw
-- **Chains**: INPUT, OUTPUT, FORWARD
-- **Targets**: ACCEPT, DROP, REJECT
+Deep knowledge compounds. When you truly understand something — not just the surface but the underlying mechanics — you start seeing it everywhere. Security principles show up in system design. Physics intuition helps with network behavior. The investment pays off in unexpected ways.
 
-## Common Commands
+## The Case for Breadth
 
-Block an IP address:
-\`\`\`bash
-sudo iptables -A INPUT -s 192.168.1.100 -j DROP
-\`\`\`
+Broad exposure gives you more surface area for connections. Some of the most interesting insights come from applying ideas from one field to problems in another. You can't do that if you only ever look in one direction.
 
-Allow SSH only from specific subnet:
-\`\`\`bash
-sudo iptables -A INPUT -p tcp --dport 22 -s 192.168.1.0/24 -j ACCEPT
-\`\`\`
+## What I Actually Do
 
-## Persistence
+I try to go deep on the things I work with every day — infrastructure, security, automation — while staying curious about everything else. I read widely but don't pressure myself to master everything I read.
 
-Save rules:
-\`\`\`bash
-sudo iptables-save > /etc/iptables/rules.v4
-\`\`\`
+The goal isn't to know everything. It's to keep the curiosity alive.
     `
   },
   {
-    title: 'Detecting DDoS Attacks with Snort',
-    slug: 'ddos-detection',
-    date: '2026-01-10',
-    tags: ['IDS', 'Snort', 'DDoS'],
-    excerpt: 'Identify and mitigate DDoS attacks using Snort IDS. Learn detection techniques for SYN floods, UDP floods, and application-layer attacks.',
+    title: 'Automating Infrastructure with Docker and Compose',
+    slug: 'docker-compose-automation',
+    date: '2026-03-28',
+    tags: ['Technology', 'DevOps', 'Automation'],
+    excerpt: 'Docker Compose changed how I think about deploying services. Here is a practical look at how I use it to manage my infrastructure.',
     content: `
-# Detecting DDoS Attacks with Snort
+# Automating Infrastructure with Docker and Compose
 
-DDoS attacks are among the most common threats. Here's how to detect them with Snort.
+Before Docker, deploying a service meant a long checklist: install dependencies, configure the environment, handle conflicts with other services. Docker Compose made that repeatable and portable.
 
-## Types of DDoS Attacks
+## A Simple Example
 
-1. **SYN Flood**: Overwhelms with TCP SYN packets
-2. **UDP Flood**: Floods with UDP packets
-3. **HTTP Flood**: Application-layer attack
-
-## Detection Rules
-
-### SYN Flood Detection
-
-\`\`\`
-alert tcp any any -> $HOME_NET any (msg:"Potential SYN flood"; flags:S; detection_filter:track by_dst, count 200, seconds 1; sid:1000014; rev:1;)
+\`\`\`yaml
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
 \`\`\`
 
-### UDP Flood Detection
+One file. One command. The service is running.
 
-\`\`\`
-alert udp any any -> $HOME_NET any (msg:"Potential UDP flood"; detection_filter:track by_dst, count 500, seconds 1; sid:1000015; rev:1;)
-\`\`\`
+## What I Actually Use It For
 
-## Mitigation Strategies
+- Running personal projects and tools
+- Spinning up test environments quickly
+- Keeping services isolated from each other
+- Making deployments reproducible across machines
 
-- Rate limiting
-- Traffic filtering
-- Load balancing
-- CDN services
+## The Bigger Picture
+
+Compose is just one piece. The real value comes from combining it with proper environment management, health checks, and a clear mental model of how your services depend on each other. Once you have that, deployments stop being stressful.
     `
   },
   {
-    title: 'Blue Team vs Red Team: Understanding the Difference',
-    slug: 'blue-vs-red-team',
-    date: '2026-01-05',
-    tags: ['Blue Team', 'Research'],
-    excerpt: 'Explore the roles, responsibilities, and methodologies of Blue Team defenders versus Red Team attackers in cybersecurity operations.',
+    title: 'Things I Wish I Knew Earlier About Linux',
+    slug: 'linux-lessons',
+    date: '2026-03-10',
+    tags: ['Technology', 'Linux', 'Learning'],
+    excerpt: 'After years of working with Linux daily, here are the things that took me too long to learn and would have saved me a lot of time.',
     content: `
-# Blue Team vs Red Team
+# Things I Wish I Knew Earlier About Linux
 
-Understanding the difference between Blue and Red teams is crucial for cybersecurity professionals.
+Linux rewards patience and curiosity. But there are some things that would have saved me a lot of time if I had learned them earlier.
 
-## Blue Team (Defenders)
+## 1. Read the Man Pages
 
-**Responsibilities:**
-- Monitor security systems
-- Respond to incidents
-- Implement security controls
-- Conduct security audits
+I used to skip straight to Stack Overflow. The man pages are actually well-written and often answer the question faster. \`man <command>\` is always the first stop now.
 
-**Tools:**
-- SIEM systems
-- IDS/IPS
-- Firewalls
-- Log analyzers
+## 2. Understand File Permissions Properly
 
-## Red Team (Attackers)
+Not just the numbers — understand why they exist and what they protect. A lot of security issues come from permissions that are too permissive because someone just wanted something to work.
 
-**Responsibilities:**
-- Simulate real attacks
-- Find vulnerabilities
-- Test security controls
-- Provide attack reports
+## 3. Learn to Use tmux or screen
 
-**Tools:**
-- Metasploit
-- Burp Suite
-- Nmap
-- Social engineering
+Running long processes over SSH without a terminal multiplexer is asking for trouble. One dropped connection and the job is gone.
 
-## Purple Team
+## 4. systemd Is Worth Learning
 
-The combination of both teams working together to improve overall security posture.
+It manages almost everything on a modern Linux system. Understanding how services start, stop, and depend on each other makes troubleshooting much faster.
+
+## 5. The Shell Is a Programming Language
+
+Bash scripting feels awkward at first but it is incredibly powerful for automation. Learning it properly — not just copying snippets — pays off quickly.
+    `
+  },
+  {
+    title: 'A Few Thoughts on Scientific Curiosity',
+    slug: 'scientific-curiosity',
+    date: '2026-02-15',
+    tags: ['Science', 'Personal', 'Learning'],
+    excerpt: 'Science is not just a profession or a method. It is a way of engaging with the world. Some thoughts on keeping that curiosity alive.',
+    content: `
+# A Few Thoughts on Scientific Curiosity
+
+I studied cybersecurity, but my curiosity has never stayed inside that boundary. Physics, mathematics, biology, chemistry — I find myself drawn to all of it. Not to become an expert in each, but because understanding how the world works at a fundamental level is genuinely exciting.
+
+## Why It Matters in Tech
+
+Technology is applied science. The more you understand the underlying principles — information theory, physics of computation, mathematics of cryptography — the better your intuition becomes. You stop treating systems as black boxes and start seeing the mechanisms inside.
+
+## Staying Curious as a Practice
+
+Curiosity is not something you either have or don't. It is something you practice. Reading outside your field. Asking why something works, not just how. Being comfortable not knowing and sitting with a question long enough to actually think about it.
+
+## What I Read
+
+I keep a mix of technical and non-technical reading. Papers, books on physics and mathematics, science journalism. Not everything sticks, but the habit of engaging with ideas outside my immediate work keeps my thinking from getting too narrow.
+
+The world is more interesting than any single discipline can contain.
     `
   }
 ];
 
-export default posts;   
+export default posts;

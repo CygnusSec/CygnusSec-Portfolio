@@ -3,6 +3,9 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+# Exclude lock files to avoid architecture conflicts in Docker
+package-lock.json
+yarn.lock
 
 # Build output
 dist
@@ -29,10 +32,10 @@ Thumbs.db
 .env.local
 .env.*.local
 
-# Documentation
-README.md
-CHANGELOG.md
-*.md
+# Documentation (keep essential files)
+# README.md
+# CHANGELOG.md
+# *.md
 
 # Docker
 Dockerfile

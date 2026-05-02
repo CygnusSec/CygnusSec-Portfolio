@@ -9,12 +9,9 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies (production only for smaller image)
-RUN npm ci --only=production --ignore-scripts && \
+# Install all dependencies fresh (avoids optional dependency issues)
+RUN npm install && \
     npm cache clean --force
-
-# Install dev dependencies needed for build
-RUN npm install --only=development
 
 # Copy source code
 COPY . .

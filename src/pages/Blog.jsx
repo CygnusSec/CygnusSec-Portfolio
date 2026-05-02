@@ -20,7 +20,7 @@ const Blog = () => {
           <span className="text-white">&gt;</span> {pageTitle}
         </h1>
         <p className="text-gray-400 text-lg">
-          Insights on IDS/IPS, Blue Team operations, and cybersecurity research.
+          Personal experiences, thoughts on technology, science, and everything in between.
         </p>
       </div>
 

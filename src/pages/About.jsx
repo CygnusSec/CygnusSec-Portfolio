@@ -78,39 +78,51 @@ const About = () => {
               
               <div className="space-y-4 text-gray-300 leading-relaxed">
                 <p>
-                  I'm a cybersecurity researcher at the <strong className="text-green-400">{config.author.organization}</strong>, 
-                  specializing in Intrusion Detection Systems (IDS) and Intrusion Prevention Systems (IPS).
-                </p>
-                
-                <p>
-                  My work focuses on <strong className="text-green-400">Blue Team operations</strong>, 
-                  building real-world security labs, and developing custom detection rules for network security monitoring.
+                  I graduated with a Bachelor's degree in <strong className="text-green-400">Cyber Security</strong> from the{' '}
+                  <strong className="text-green-400">University of Science and Technology of Hanoi</strong>. Currently, I work as a{' '}
+                  <strong className="text-green-400">Researcher</strong> at the{' '}
+                  <strong className="text-green-400">Institute of Information Technology – Vietnam Academy of Science and Technology</strong>,
+                  while also serving as a <strong className="text-green-400">DevOps Engineer</strong> at bGlobal JSC.
                 </p>
 
                 <p>
-                  I'm passionate about sharing knowledge through documentation, lab reports, and blog posts 
-                  to help others learn practical cybersecurity skills.
+                  Throughout my professional journey, I have been involved in designing and building IT systems and infrastructure
+                  for government agencies, as well as participating in the assessment, incident response, and security reinforcement
+                  of information security issues. These experiences have helped me develop a comprehensive system-thinking mindset,
+                  strong problem-solving abilities, and deeper expertise in infrastructure operations and cybersecurity.
+                </p>
+
+                <p>
+                  I am passionate about technology, especially in the areas of{' '}
+                  <strong className="text-green-400">system infrastructure, security, automation, and operational optimization</strong>.
+                  Beyond my professional work, I have a strong interest in scientific research and natural sciences, and I am always
+                  eager to explore new knowledge and innovative ideas to continuously improve myself and create practical value in my work.
+                </p>
+
+                <p>
+                  With a proactive mindset, logical thinking, and persistence in both learning and research, I always strive to build
+                  effective, sustainable, and high-value solutions.
                 </p>
 
                 <div className="mt-8 pt-6 border-t border-green-500/30">
                   <h3 className="text-lg font-mono text-green-400 mb-4">
-                    Research Interests
+                    Areas of Expertise
                   </h3>
                   <ul className="space-y-2 text-gray-300">
                     <li className="flex items-center gap-2">
-                      <span className="text-green-400">▸</span> Network Security Monitoring
+                      <span className="text-green-400">▸</span> System Infrastructure & DevOps
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-400">▸</span> Intrusion Detection & Prevention
+                      <span className="text-green-400">▸</span> Information Security & Incident Response
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-400">▸</span> Threat Hunting & Analysis
+                      <span className="text-green-400">▸</span> Security Assessment & Reinforcement
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-400">▸</span> Security Lab Development
+                      <span className="text-green-400">▸</span> Automation & Operational Optimization
                     </li>
                     <li className="flex items-center gap-2">
-                      <span className="text-green-400">▸</span> Blue Team Tactics
+                      <span className="text-green-400">▸</span> Scientific Research & Innovation
                     </li>
                   </ul>
                 </div>

@@ -44,6 +44,8 @@ export const config = {
   get avatarUrl()      { return get('AVATAR_URL',       import.meta.env.VITE_AVATAR_URL,       'https://i.ibb.co/MBtjqXQ/avatar.jpg'); },
   get navButtons()     { return parseNavButtons(get('NAV_BUTTONS', import.meta.env.VITE_NAV_BUTTONS, null)); },
   get gaId()           { return get('GA_ID',            import.meta.env.VITE_GA_ID,            ''); },
+  get typingSpeed()    { return parseInt(get('TYPING_SPEED',         import.meta.env.VITE_TYPING_SPEED,         '120')); },
+  get typingRestartDelay() { return parseInt(get('TYPING_RESTART_DELAY', import.meta.env.VITE_TYPING_RESTART_DELAY, '5000')); },
 
   get author() {
     return {

@@ -1,79 +1,87 @@
+import { useState, useCallback, useEffect, useRef } from 'react';
 import LinuxImage from '../images/linux.png';
 import TypingText from '../components/TypingText';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import { config } from '../config/env';
 
 const Home = () => {
-  useDocumentTitle('', true); // Use default site title
+  useDocumentTitle('', true);
+
+  const SPEED = config.typingSpeed;
+  const RESTART_DELAY = config.typingRestartDelay;
+
+  // 0=greeting, 1=nameEN, 2=nameVI, 3=role, 4=bio, 5=done
+  const [step, setStep] = useState(0);
+  const [key, setKey] = useState(0); // tăng key để force re-mount TypingText
+  const timerRef = useRef(null);
+
+  const next = useCallback((s) => () => setStep(s), []);
+
+  // Khi bio xong (step=5), đợi 5s rồi restart
+  useEffect(() => {
+    if (step === 5) {
+      timerRef.current = setTimeout(() => {
+        setStep(0);
+        setKey(k => k + 1);
+      }, RESTART_DELAY);
+    }
+    return () => clearTimeout(timerRef.current);
+  }, [step]);
 
   return (
-    <section className="min-h-screen flex items-center px-[6vw]">
-      <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-24 items-center">
+    <section className="h-[calc(100vh-70px)] flex items-center px-[6vw] overflow-hidden">
+      <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-16 items-start">
 
         {/* LEFT */}
-        <div>
-          {/* HEADLINE */}
-          <h1 className="font-mono font-bold leading-tight">
+        <div key={key}>
+
+          {/* GREETING */}
+          <p className="font-mono text-green-400 text-base mb-2 tracking-widest uppercase">
+            <TypingText text="Hi, my name is" speed={SPEED} wordMode onDone={next(1)} />
+          </p>
+
+          {/* NAME */}
+          <h1 className="font-mono font-bold leading-tight mb-4">
             <div className="text-5xl md:text-6xl text-white">
-              Secure Your Future
+              {step >= 1 && (
+                <TypingText text={config.author.nameEn} speed={SPEED} wordMode onDone={next(2)} />
+              )}
             </div>
-
-            <div className="relative text-6xl md:text-5xl text-green-400">
-            {/* text giữ chỗ */}
-            <span className="invisible">with Ethical Hacking</span>
-
-            {/* typing overlay */}
-            <span className="absolute left-0 top-0">
-                <TypingText
-                text="with Ethical Hacking"
-                speed={100}
-                />
-            </span>
-
-            </div>
-
-            <div className="text-6xl md:text-6xl text-white">
-              Done Right
+            <div className="text-2xl md:text-3xl text-green-400 mt-3">
+              {step >= 2 && (
+                <TypingText text={config.author.name} speed={SPEED} wordMode onDone={next(3)} />
+              )}
             </div>
           </h1>
 
-          {/* DESCRIPTION */}
-          <p className="mt-8 max-w-2xl text-lg text-gray-400 leading-relaxed">
-            From deep-dive penetration testing to proactive threat monitoring,
-            I provide tailored solutions to secure your network and protect
-            your business.
+          {/* ROLE */}
+          <p className="font-mono text-gray-400 text-sm mb-4 tracking-wide">
+            {step >= 3 && (
+              <TypingText text={config.author.position} speed={SPEED} wordMode onDone={next(4)} />
+            )}
           </p>
 
-          {/* CTA */}
-          <div className="mt-10 flex items-center gap-8">
-            <a
-              href="/about"
-              className="text-white font-mono hover:underline"
-            >
-              More About Me →
-            </a>
+          {/* BIO */}
+          <p className="max-w-xl text-base text-gray-300 leading-relaxed">
+            {step >= 4 && (
+              <TypingText
+                text="I research and build security systems, DevOps infrastructure, and operational automation. Passionate about exploring technology, sharing knowledge, and continuous learning."
+                speed={SPEED}
+                wordMode
+                onDone={next(5)}
+              />
+            )}
+          </p>
 
-            <a
-              href="/about"
-              className="
-                px-6 py-3
-                border border-green-400
-                text-green-300 font-mono
-                hover:bg-green-400/10
-                transition
-              "
-            >
-              Contact Me!
-            </a>
-          </div>
         </div>
 
         {/* RIGHT – AVATAR */}
         <div className="flex justify-center md:justify-end">
           <div className="
-            w-[420px] h-[420px]
+            w-72 h-72 md:w-96 md:h-96
             rounded-full
-            border-[14px] border-green-400
-            shadow-[0_0_80px_rgba(0,255,0,0.35)]
+            border-[10px] border-green-400
+            shadow-[0_0_60px_rgba(0,255,0,0.3)]
             overflow-hidden
           ">
             <img

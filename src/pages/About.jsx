@@ -141,10 +141,11 @@ const About = () => {
             <div className="space-y-3">
               {[
                 { name: 'Linux (Ubuntu/Debian)', level: 95 },
-                { name: 'Docker / Kubernetes',   level: 88 },
+                { name: 'Docker / Kubernetes',   level: 80 },
                 { name: 'Snort / Suricata',      level: 85 },
-                { name: 'Firewall (iptables)',    level: 85 },
-                { name: 'Wireshark',             level: 82 },
+                { name: 'Firewall (iptables)',    level: 95 },
+                { name: 'TCP-DUMP',             level: 82 },
+                { name: 'Pfsense',             level: 82 },
               ].map(s => <SkillBar key={s.name} {...s} />)}
             </div>
           </div>
@@ -155,10 +156,13 @@ const About = () => {
             <div className="space-y-3">
               {[
                 { name: 'Bash Scripting',  level: 90 },
-                { name: 'Python',          level: 85 },
-                { name: 'CI/CD Pipelines', level: 80 },
-                { name: 'JavaScript',      level: 75 },
-                { name: 'YAML / JSON',     level: 80 },
+                { name: 'Python',          level: 70 },
+                { name: 'CI/CD Pipelines', level: 85 },
+                { name: 'JavaScript',      level: 50 },
+                { name: 'Java',            level: 70 },
+                { name: 'Swift (Programming Language)',          level: 75 },
+                { name: 'Jenkins',         level: 92 },
+                { name: 'Docker',          level: 92 },
               ].map(s => <SkillBar key={s.name} {...s} />)}
             </div>
           </div>

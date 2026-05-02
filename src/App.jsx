@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 import MatrixBackground from './components/MatrixBackground';
 import Header from './components/Header';
@@ -11,6 +11,9 @@ import Posts from './pages/Posts';
 import Projects from './pages/Projects';
 
 const App = () => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <>
       <Header />
@@ -18,7 +21,8 @@ const App = () => {
       <MatrixBackground />
       <div className="matrix-overlay" />
 
-      <div className="relative z-10 pt-[70px]">
+      <div className="relative z-10 pt-[70px] flex flex-col min-h-screen">
+        <div className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
 
@@ -57,10 +61,20 @@ const App = () => {
               </main>
             }
           />
-        </Routes>
 
-        <Footer />
+          {/* Redirect mọi path không tồn tại về home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        </div>
+
+        {!isHome && <Footer />}
       </div>
+
+      {isHome && (
+        <div className="fixed bottom-0 left-0 right-0 z-20">
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

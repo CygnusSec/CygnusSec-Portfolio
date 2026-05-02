@@ -72,6 +72,33 @@ html {
   font-family: 'Cyber Blast', 'Courier New', monospace;
   font-size: 1.5rem;
   letter-spacing: 0.05em;
+  color: #00ff99;
+  text-shadow:
+    0 0 6px #00ff99,
+    0 0 12px #00ff99,
+    0 0 24px #00ffcc,
+    0 0 48px #00ffcc;
+  animation: cyberFlicker 4s infinite;
+}
+
+.logo-char {
+  display: inline-block;
+  animation: cyberWave 2.4s ease-in-out infinite, cyberFlicker 4s infinite;
+}
+
+@keyframes cyberWave {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes cyberFlicker {
+  0%   { text-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 24px #00ffcc, 0 0 48px #00ffcc; opacity: 1; }
+  3%   { text-shadow: none; opacity: 0.85; }
+  4%   { text-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 24px #00ffcc, 0 0 48px #00ffcc; opacity: 1; }
+  50%  { text-shadow: 0 0 8px #00ff99, 0 0 18px #00ffcc, 0 0 36px #00ffcc, 0 0 60px #00ff99; opacity: 1; }
+  52%  { text-shadow: none; opacity: 0.9; }
+  53%  { text-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 24px #00ffcc, 0 0 48px #00ffcc; opacity: 1; }
+  100% { text-shadow: 0 0 6px #00ff99, 0 0 12px #00ff99, 0 0 24px #00ffcc, 0 0 48px #00ffcc; opacity: 1; }
 }
 
 /* 🔸 Menu button */
@@ -277,6 +304,15 @@ html.light .to-green-400         { --tw-gradient-to: #009060 !important; }
 /* Light mode matrix background — subtle grid instead of falling chars */
 html.light .matrix-overlay {
   opacity: 0.4;
+}
+
+/* Light mode logo — giữ glow nhưng tối hơn */
+html.light .logo-cyber {
+  color: #007a50;
+  text-shadow:
+    0 0 4px #007a50,
+    0 0 10px #009060,
+    0 0 20px #009060;
 }
 
 /* Theme toggle button */

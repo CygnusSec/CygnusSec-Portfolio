@@ -1,24 +1,36 @@
 import { useEffect, useState } from 'react';
 
-const TypingText = ({ text, speed = 60, className = '' }) => {
+const TypingText = ({ text, speed = 60, wordMode = false, onDone, className = '' }) => {
   const [displayed, setDisplayed] = useState('');
   const [index, setIndex] = useState(0);
 
-  useEffect(() => {
-    if (index < text.length) {
-      const timer = setTimeout(() => {
-        setDisplayed(prev => prev + text[index]);
-        setIndex(index + 1);
-      }, speed);
+  const tokens = wordMode ? text.split(' ') : text.split('');
 
+  useEffect(() => {
+    setDisplayed('');
+    setIndex(0);
+  }, [text]);
+
+  useEffect(() => {
+    if (index < tokens.length) {
+      const timer = setTimeout(() => {
+        setDisplayed(prev =>
+          wordMode
+            ? prev + (prev ? ' ' : '') + tokens[index]
+            : prev + tokens[index]
+        );
+        setIndex(i => i + 1);
+      }, speed);
       return () => clearTimeout(timer);
+    } else if (index === tokens.length && tokens.length > 0) {
+      onDone?.();
     }
-  }, [index, text, speed]);
+  }, [index, tokens, speed, wordMode, onDone]);
 
   return (
     <span className={className}>
       {displayed}
-      <span className="animate-pulse">▍</span>
+      {index < tokens.length && <span className="animate-pulse">▍</span>}
     </span>
   );
 };

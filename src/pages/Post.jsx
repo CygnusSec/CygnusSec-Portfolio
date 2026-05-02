@@ -34,7 +34,7 @@ const Post = () => {
   );
 
   return (
-    <article className="max-w-3xl mx-auto">
+    <article>
       <Link
         to="/posts"
         className="inline-flex items-center gap-2 text-green-400 hover:text-green-300 transition mb-8 font-mono"
@@ -71,16 +71,6 @@ const Post = () => {
           : <p className="text-gray-400">Content coming soon...</p>
         }
       </div>
-
-      {/* Footer */}
-      <footer className="mt-12 pt-8 border-t border-green-500/30 flex justify-between items-center">
-        <Link to="/posts" className="text-green-400 hover:text-green-300 transition font-mono">
-          ← All Posts
-        </Link>
-        <Link to="/about" className="text-green-400 hover:text-green-300 transition font-mono">
-          Contact Me →
-        </Link>
-      </footer>
     </article>
   );
 };

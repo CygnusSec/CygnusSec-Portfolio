@@ -60,6 +60,7 @@ COPY public/content /usr/share/nginx/html/content-seed
 COPY public/config.js.template /usr/share/nginx/html/config.js.template
 
 # Copy custom Nginx config
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Copy entrypoint script for runtime env injection
@@ -72,8 +73,10 @@ RUN addgroup -g 1001 -S nginx-user && \
     chown -R nginx-user:nginx-user /usr/share/nginx/html && \
     chown -R nginx-user:nginx-user /var/cache/nginx && \
     chown -R nginx-user:nginx-user /var/log/nginx && \
-    touch /var/run/nginx.pid && \
-    chown nginx-user:nginx-user /var/run/nginx.pid && \
+    mkdir -p /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp && \
+    chown -R nginx-user:nginx-user /tmp/client_temp /tmp/proxy_temp /tmp/fastcgi_temp /tmp/uwsgi_temp /tmp/scgi_temp && \
+    touch /tmp/nginx.pid && \
+    chown nginx-user:nginx-user /tmp/nginx.pid && \
     chown nginx-user:nginx-user /docker-entrypoint.sh && \
     mkdir -p /usr/share/nginx/html/content && \
     chown nginx-user:nginx-user /usr/share/nginx/html/content

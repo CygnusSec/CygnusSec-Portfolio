@@ -29,7 +29,7 @@ const App = () => {
           <Route
             path="/about"
             element={
-              <main className="px-12 py-16">
+              <main className="px-4 md:px-12 py-16">
                 <About />
               </main>
             }
@@ -38,7 +38,7 @@ const App = () => {
           <Route
             path="/projects"
             element={
-              <main className="px-12 py-16">
+              <main className="px-4 md:px-12 py-16">
                 <Projects />
               </main>
             }
@@ -47,7 +47,7 @@ const App = () => {
           <Route
             path="/posts"
             element={
-              <main className="px-12 py-16">
+              <main className="px-4 md:px-12 py-16">
                 <Posts />
               </main>
             }
@@ -56,7 +56,7 @@ const App = () => {
           <Route
             path="/post/:slug"
             element={
-              <main className="px-12 py-16">
+              <main className="px-4 md:px-12 py-16">
                 <Post />
               </main>
             }

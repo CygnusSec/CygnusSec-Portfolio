@@ -75,7 +75,7 @@ const Projects = () => {
       {/* Content */}
       {active && (
         <div className="animate-fadeIn">
-          <div className={`grid gap-6 mb-6 ${active.skills?.length > 0 ? 'md:grid-cols-2' : 'grid-cols-1'}`}>
+          <div className={`grid gap-6 mb-6 ${active.skills?.length > 0 ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}>
             {/* Markdown content */}
             <div className="bg-glass border border-green-500/30 rounded-lg p-6">
               {mdLoading

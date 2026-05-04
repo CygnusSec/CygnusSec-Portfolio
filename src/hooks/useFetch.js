@@ -13,7 +13,9 @@ const useFetch = (url) => {
     fetch(url, {
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
+          'Cache-Control': 'no-cache',
         },
+        cache: 'no-store',
       })
       .then(res => {
         if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);

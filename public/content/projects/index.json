@@ -2,6 +2,10 @@
   {
     "id": "ids-ips",
     "label": "IDS/IPS Research",
+    "title": "IDS/IPS Research with Snort",
+    "excerpt": "Research and implementation of Intrusion Detection and Prevention Systems using Snort on Linux. Includes rule writing, traffic analysis, and lab reports.",
+    "date": "2026-04-01",
+    "tags": ["Security", "IDS", "Snort", "Linux"],
     "hasPdfs": true,
     "skills": [
       { "name": "Snort IDS/IPS",        "level": 95 },
@@ -15,18 +19,30 @@
   {
     "id": "network-security",
     "label": "Network Security",
+    "title": "Network Security & Traffic Analysis",
+    "excerpt": "Deep dive into network security concepts including packet inspection, firewall configuration, VPN setup, and network monitoring.",
+    "date": "2026-03-15",
+    "tags": ["Networking", "Security", "Firewall"],
     "hasPdfs": false,
     "skills": []
   },
   {
     "id": "blue-team",
     "label": "Blue Team Labs",
+    "title": "Blue Team Defense Labs",
+    "excerpt": "Hands-on blue team exercises covering incident response, log analysis, threat hunting, and security hardening of Linux systems.",
+    "date": "2026-02-20",
+    "tags": ["Blue Team", "Security", "Linux"],
     "hasPdfs": false,
     "skills": []
   },
   {
     "id": "tools",
     "label": "Security Tools",
+    "title": "Security Tools & Scripts",
+    "excerpt": "Custom security tools and automation scripts built with Python and Bash for network scanning, log parsing, and threat detection.",
+    "date": "2026-01-10",
+    "tags": ["Tools", "Python", "Automation"],
     "hasPdfs": false,
     "skills": []
   }

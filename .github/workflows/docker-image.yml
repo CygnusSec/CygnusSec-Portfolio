@@ -2,17 +2,49 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
+    tags:
+      - 'v*'
 
 jobs:
-
-  build:
-
+  docker:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Docker tag
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "TAG=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
+          elif [ "${GITHUB_REF_NAME}" = "develop" ]; then
+            echo "TAG=latest" >> $GITHUB_ENV
+
+          elif [ "${GITHUB_REF_NAME}" = "main" ]; then
+            echo "TAG=main" >> $GITHUB_ENV
+          fi
+
+      - name: Build
+        run: |
+          docker build \
+            -t ghcr.io/cygnussec/portfolio:${TAG} \
+            .
+
+      - name: Push
+        run: |
+          docker push ghcr.io/cygnussec/portfolio:${TAG}

@@ -2,25 +2,39 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches:
+      - main
+      - develop
+
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   docker:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - uses: actions/checkout@v4
-      
+      - name: Checkout source
+        uses: actions/checkout@v4
+
       - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push
+      - name: Build Docker image
         run: |
-          docker build -t docker pull ghcr.io/cygnussec/portfolio:${{ github.sha }} .
-          docker push docker pull ghcr.io/cygnussec/portfolio:${{ github.sha }}
+          docker build \
+            -t ghcr.io/cygnussec/portfolio:${{ github.sha }} \
+            .
+
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/cygnussec/portfolio:${{ github.sha }}

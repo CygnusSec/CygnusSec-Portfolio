@@ -9,6 +9,7 @@ import Post from './pages/Post';
 import About from './pages/About';
 import Posts from './pages/Posts';
 import Projects from './pages/Projects';
+import Project from './pages/Project';
 
 const App = () => {
   const location = useLocation();
@@ -58,6 +59,15 @@ const App = () => {
             element={
               <main className="px-4 md:px-12 py-16">
                 <Post />
+              </main>
+            }
+          />
+
+          <Route
+            path="/project/:id"
+            element={
+              <main className="px-4 md:px-12 py-16">
+                <Project />
               </main>
             }
           />

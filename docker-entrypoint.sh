@@ -32,11 +32,11 @@ sanitize_env_var() {
     echo "$value"
 }
 
-# Seed content volume on first run (if volume is empty)
-if [ -d "$CONTENT_SEED" ] && [ -z "$(ls -A $CONTENT_DIR 2>/dev/null)" ]; then
-  echo "📦 Seeding content volume from image..."
+# Always sync content from image seed to volume (update existing files)
+if [ -d "$CONTENT_SEED" ]; then
+  echo "📦 Syncing content from image to volume..."
   cp -r "$CONTENT_SEED/." "$CONTENT_DIR/"
-  echo "✅ Content seeded successfully!"
+  echo "✅ Content synced successfully!"
 fi
 
 if [ -f "$CONFIG_TEMPLATE" ]; then

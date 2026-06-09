@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.17.10",
     "katex": "0.16.45",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -19,7 +21,9 @@
     "rehype-katex": "7.0.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-math": "6.0.0"
+    "remark-math": "6.0.0",
+    "three": "^0.171.0",
+    "three-stdlib": "^2.35.13"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",

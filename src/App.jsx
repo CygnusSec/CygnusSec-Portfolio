@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 
 import MatrixBackground from './components/MatrixBackground';
@@ -11,16 +12,84 @@ import Posts from './pages/Posts';
 import Projects from './pages/Projects';
 import Project from './pages/Project';
 
+const backgroundVariants = ['cube', 'sphere', 'tesseract', 'liquid', 'helios', 'blackhole', 'emerald', 'node', 'hypersphere', 'cloud', 'magnetar', 'rain'];
+const backgroundLabels = {
+  cube: 'Cube',
+  sphere: 'Sphere',
+  tesseract: 'Tesseract',
+  liquid: 'Liquid',
+  helios: 'Helios',
+  blackhole: 'TON618',
+  emerald: 'Emerald',
+  node: 'Node',
+  hypersphere: 'Hypersphere',
+  cloud: 'Cloud',
+  magnetar: 'Magnetar',
+  rain: 'Matrix',
+};
+
+const getRandomBackgroundVariant = () => (
+  backgroundVariants[Math.floor(Math.random() * backgroundVariants.length)]
+);
+
 const App = () => {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const [backgroundVariant, setBackgroundVariant] = useState(getRandomBackgroundVariant);
+  const [backgroundMenuOpen, setBackgroundMenuOpen] = useState(false);
+
+  const selectBackground = (variant) => {
+    setBackgroundVariant(variant);
+    setBackgroundMenuOpen(false);
+  };
 
   return (
     <>
       <Header />
 
-      <MatrixBackground />
+      <MatrixBackground variant={backgroundVariant} />
       <div className="matrix-overlay" />
+      <div
+        className="background-switch"
+        title="Select background"
+        onBlur={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget)) {
+            setBackgroundMenuOpen(false);
+          }
+        }}
+      >
+        <button
+          type="button"
+          className="background-switch__trigger"
+          onClick={() => setBackgroundMenuOpen((open) => !open)}
+          aria-haspopup="listbox"
+          aria-expanded={backgroundMenuOpen}
+          aria-label="Select background"
+        >
+          <span className="background-switch__label">BG</span>
+          <span className="background-switch__value">
+            {backgroundLabels[backgroundVariant]}
+          </span>
+          <span className="background-switch__chevron">▾</span>
+        </button>
+
+        {backgroundMenuOpen && (
+          <div className="background-switch__menu" role="listbox" aria-label="Background options">
+            {backgroundVariants.map((variant) => (
+              <button
+                key={variant}
+                type="button"
+                className={`background-switch__option ${variant === backgroundVariant ? 'is-active' : ''}`}
+                onClick={() => selectBackground(variant)}
+                role="option"
+                aria-selected={variant === backgroundVariant}
+              >
+                {backgroundLabels[variant]}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       <div className="relative z-10 pt-[70px] flex flex-col min-h-screen">
         <div className="flex-1">

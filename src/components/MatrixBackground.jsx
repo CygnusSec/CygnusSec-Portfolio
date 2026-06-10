@@ -8,6 +8,7 @@ import HypersphereBackground from './backgrounds/HypersphereBackground';
 import JanusBackground from './backgrounds/JanusBackground';
 import LiquidCoreBackground from './backgrounds/LiquidCoreBackground';
 import MagnetarBackground from './backgrounds/MagnetarBackground';
+import NeuralEyeBackground from './backgrounds/NeuralEyeBackground';
 import NeuralNet1Background from './backgrounds/NeuralNet1Background';
 import RainBackground from './backgrounds/RainBackground';
 import ResilientNodeBackground from './backgrounds/ResilientNodeBackground';
@@ -31,6 +32,7 @@ const backgrounds = {
   bloom: HyperBloomBackground,
   spacetime: SpacetimeBlackHoleBackground,
   neuralnet1: NeuralNet1Background,
+  neuraleye: NeuralEyeBackground,
   rain: RainBackground,
 };
 

@@ -32,7 +32,7 @@ const Home = () => {
       <div className="w-full grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-16 items-center md:items-start">
 
         {/* LEFT */}
-        <div key={key} className="order-2 md:order-1">
+        <div key={key} className="order-2 md:order-1" data-background-block>
 
           {/* GREETING */}
           <p className="font-mono text-green-400 text-sm md:text-base mb-2 tracking-widest uppercase">
@@ -75,7 +75,7 @@ const Home = () => {
         </div>
 
         {/* RIGHT – AVATAR */}
-        <div className="flex justify-center order-1 md:order-2 md:justify-end">
+        <div className="flex justify-center order-1 md:order-2 md:justify-end" data-background-block>
           <div className="
             w-48 h-48 md:w-72 md:h-72 lg:w-96 lg:h-96
             rounded-full

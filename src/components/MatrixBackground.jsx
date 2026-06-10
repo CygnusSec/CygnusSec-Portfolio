@@ -3,11 +3,15 @@ import CloudBackground from './backgrounds/CloudBackground';
 import CubeBackground from './backgrounds/CubeBackground';
 import EmeraldBackground from './backgrounds/EmeraldBackground';
 import HeliosOrbitBackground from './backgrounds/HeliosOrbitBackground';
+import HyperBloomBackground from './backgrounds/HyperBloomBackground';
 import HypersphereBackground from './backgrounds/HypersphereBackground';
+import JanusBackground from './backgrounds/JanusBackground';
 import LiquidCoreBackground from './backgrounds/LiquidCoreBackground';
 import MagnetarBackground from './backgrounds/MagnetarBackground';
+import NeuralNet1Background from './backgrounds/NeuralNet1Background';
 import RainBackground from './backgrounds/RainBackground';
 import ResilientNodeBackground from './backgrounds/ResilientNodeBackground';
+import SpacetimeBlackHoleBackground from './backgrounds/SpacetimeBlackHoleBackground';
 import SphereBackground from './backgrounds/SphereBackground';
 import TesseractBackground from './backgrounds/TesseractBackground';
 
@@ -23,6 +27,10 @@ const backgrounds = {
   hypersphere: HypersphereBackground,
   cloud: CloudBackground,
   magnetar: MagnetarBackground,
+  janus: JanusBackground,
+  bloom: HyperBloomBackground,
+  spacetime: SpacetimeBlackHoleBackground,
+  neuralnet1: NeuralNet1Background,
   rain: RainBackground,
 };
 

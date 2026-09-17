@@ -12,7 +12,7 @@ import Posts from './pages/Posts';
 import Projects from './pages/Projects';
 import Project from './pages/Project';
 
-const backgroundVariants = ['cube', 'sphere', 'tesseract', 'liquid', 'helios', 'blackhole', 'emerald', 'node', 'hypersphere', 'cloud', 'magnetar', 'janus', 'bloom', 'spacetime', 'neuralnet1', 'rain'];
+const backgroundVariants = ['cube', 'sphere', 'tesseract', 'liquid', 'helios', 'blackhole', 'emerald', 'node', 'hypersphere', 'cloud', 'magnetar', 'janus', 'bloom', 'spacetime', 'neuralnet1', 'neuraleye', 'rain'];
 const backgroundLabels = {
   cube: 'Cube',
   sphere: 'Sphere',
@@ -29,6 +29,7 @@ const backgroundLabels = {
   bloom: 'Bloom',
   spacetime: 'Spacetime',
   neuralnet1: 'Neural Net 1',
+  neuraleye: 'Neural Eye',
   rain: 'Matrix',
 };
 

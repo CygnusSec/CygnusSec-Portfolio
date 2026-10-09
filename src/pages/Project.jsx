@@ -4,7 +4,8 @@ import useFetch from '../hooks/useFetch';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import SkillBar from '../components/SkillBar';
 import PdfList from '../components/PdfList';
-import CtfWriteup from './CtfWriteup';
+
+const CTF_WRITEUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScCe3nHAUSvg2q7NjCDgpz9AT702VgZAXGZxDkdBC50w00SpA/viewform';
 
 const Project = () => {
   const { id } = useParams();
@@ -64,6 +65,17 @@ const Project = () => {
             ))}
           </div>
         </div>
+
+        {id === 'ids-ips' && (
+          <a
+            href={CTF_WRITEUP_FORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-download inline-flex items-center gap-2 mt-6"
+          >
+            Submit CTF Writeup <span aria-hidden="true">↗</span>
+          </a>
+        )}
       </header>
 
       {/* Content + Skills */}
@@ -96,9 +108,6 @@ const Project = () => {
           <PdfList />
         </div>
       )}
-
-      {/* The CTF writeup form belongs to the IDS/IPS challenge project. */}
-      {id === 'ids-ips' && <CtfWriteup />}
     </article>
   );
 };

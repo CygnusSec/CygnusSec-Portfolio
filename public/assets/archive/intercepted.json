@@ -1,0 +1,16 @@
+{
+  "records": [
+    {
+      "id": "status",
+      "algorithm": "AES-CTR",
+      "nonce": "5c6a1b2f82ee1de39bfd9aebf644cf52",
+      "ciphertext": "hmtCbUUGPtAsRCODWwBCaw1xtn7PS5UyZ7+rYFxjMf6Z1kdk/E9IISmKTU32SXQx81peX1Yho3fSIhpGc3bu6nehweoRNmBOPBCX6wbEio00L9WwJ3RslQ34L8KvQLXmH9RciI3BdV3jZYIuXLRAF0k24bk4rD7+eVA1dHFKKL7g5Kyl+sANdvMgw/alFw=="
+    },
+    {
+      "id": "secret",
+      "algorithm": "AES-CTR",
+      "nonce": "5c6a1b2f82ee1de39bfd9aebf644cf52",
+      "ciphertext": "hmtCbUUGPtAsRCODWwBCaw1xtn7PS5UyZ7+rYFxjMf6Z1kdk/E9IISmKTU32SWUz9UpZX1Yxn17vGDsoWV6urUiP/Pk0GEYsHi6iuyHypA=="
+    }
+  ]
+}

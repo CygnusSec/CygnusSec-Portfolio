@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /api/internal/orbit
+Disallow: /backup/
 
 # telemetry-seed: cygnus-security-2026
 # orbit-token: first 12 hexadecimal characters of SHA-256(seed)
 # send the token in the X-Cygnus-Orbit request header
+# stale orbital relay backups were excluded from indexing

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import useFetch from '../hooks/useFetch';
@@ -18,6 +19,13 @@ const Project = () => {
   );
 
   useDocumentTitle(project ? project.title : id);
+
+  useEffect(() => {
+    if (id === 'ids-ips') {
+      const relayIndex = atob('L2Fzc2V0cy9hcmNoaXZlL2ludGVyY2VwdGVkLmpzb24=');
+      sessionStorage.setItem('orbital-relay-index', relayIndex);
+    }
+  }, [id]);
 
   if (loadingIndex || loadingContent) return (
     <div className="text-green-400 font-mono animate-pulse py-20 text-center">

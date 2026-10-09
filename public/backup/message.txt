@@ -1,0 +1,6 @@
+ORBITAL RELAY v1
+A status packet was sent before the secret packet.
+The status packet template is:
+[ORBITAL-RELAY/1] SESSION=CYGNUS-07; MESSAGE=STATUS; SENSOR=OK; PAYLOAD=ALL SYSTEMS NOMINAL. THE OBSERVATORY IS ONLINE. NO ANOMALIES DETECTED.
+
+Investigate the encryption implementation.

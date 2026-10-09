@@ -4,6 +4,7 @@ import useFetch from '../hooks/useFetch';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import SkillBar from '../components/SkillBar';
 import PdfList from '../components/PdfList';
+import CtfWriteup from './CtfWriteup';
 
 const Project = () => {
   const { id } = useParams();
@@ -95,6 +96,9 @@ const Project = () => {
           <PdfList />
         </div>
       )}
+
+      {/* The CTF writeup form belongs to the IDS/IPS challenge project. */}
+      {id === 'ids-ips' && <CtfWriteup />}
     </article>
   );
 };

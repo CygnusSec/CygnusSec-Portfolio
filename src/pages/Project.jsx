@@ -5,6 +5,7 @@ import useFetch from '../hooks/useFetch';
 import MarkdownRenderer from '../components/MarkdownRenderer';
 import SkillBar from '../components/SkillBar';
 import PdfList from '../components/PdfList';
+import GhostPixelsHint from '../components/GhostPixelsHint';
 
 const CTF_WRITEUP_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScCe3nHAUSvg2q7NjCDgpz9AT702VgZAXGZxDkdBC50w00SpA/viewform';
 
@@ -116,6 +117,8 @@ const Project = () => {
           <PdfList />
         </div>
       )}
+
+      {id === 'ids-ips' && <GhostPixelsHint />}
     </article>
   );
 };

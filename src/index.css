@@ -7,6 +7,8 @@
   --spectral-b: 7243264c;
   --spectral-r: 377a54;
   --spectral-g: 794d48;
+  /* The origin is encoded, not encrypted. */
+  --ghost-origin: "N3pUeU1IckMmTA==";
 }
 
 /* 🔸 Custom Font - Cyber Blast */
@@ -27,6 +29,13 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.challenge-hint {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
 }
 
 /* 🔹 Cyber Glass Card */

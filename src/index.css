@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CTF vault material: concatenate the numbered fragments. */
+/* Spectral calibration tokens for the cyber theme. */
 :root {
-  --cygnus-vault-02: "MHrC";
-  --cygnus-vault-01: "7zTy";
-  --cygnus-vault-03: "\26 L";
+  --spectral-b: 7243264c;
+  --spectral-r: 377a54;
+  --spectral-g: 794d48;
 }
 
 /* 🔸 Custom Font - Cyber Blast */

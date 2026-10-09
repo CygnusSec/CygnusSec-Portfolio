@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CTF vault material: concatenate the numbered fragments. */
+:root {
+  --cygnus-vault-02: "MHrC";
+  --cygnus-vault-01: "7zTy";
+  --cygnus-vault-03: "\26 L";
+}
+
 /* 🔸 Custom Font - Cyber Blast */
 @font-face {
   font-family: 'Cyber Blast';
